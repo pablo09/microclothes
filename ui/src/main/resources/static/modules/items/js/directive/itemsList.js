@@ -1,14 +1,15 @@
 (function () {
     'use strict';
-    angular.module('uiApp.items').directive('itemsList',
-        itemsList);
+    angular.module('uiApp.items').directive('itemsList', ['$state',
+        itemsList]);
 
-    function itemsList() {
+    function itemsList($state) {
         return {
             restrict : 'E',
             templateUrl : 'modules/items/templates/items.html',
             scope: {
-                data: "="
+                data: "=",
+                type: '@type'
             },
             controller : controller,
             controllerAs : 'vm'
@@ -48,8 +49,13 @@
                 return items;
             };
 
+            vm.goToDetails = function(itemId) {
+              $state.go(vm.type, {itemId: itemId});
+            };
+
             (function init() {
                 vm.items = $scope.data;
+                vm.type = $scope.type;
                 createTotalItemsRange(vm.items);
             })();
 

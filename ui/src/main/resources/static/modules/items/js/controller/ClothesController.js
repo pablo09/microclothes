@@ -6,6 +6,7 @@
 
         (function init() {
             vm.clothes = ItemService.getClothes();
+
         })();
     }
 

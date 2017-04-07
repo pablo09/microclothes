@@ -3,9 +3,15 @@
     function ShoesCtrl($log, $http, $state, ItemService, NotificationService) {
         var vm = this;
         vm.shoes = [];
+        vm.shoesLoaded = false;
 
         (function init() {
-            vm.shoes = ItemService.getShoes();
+            ItemService.getShoes().then(function(response) {
+                vm.shoes = response.data;
+                vm.shoesLoaded = true;
+            }, function(error) {
+                NotificationService.failedOperation();
+            });
         })();
     }
 

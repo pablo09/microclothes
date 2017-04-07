@@ -11,17 +11,17 @@
         }
 
         function getShoes() {
-            RestService.makeMicroCall(ApiService.getShoesURL()).then(function(response) {
-               return response;
-            }, function(error) {
-                NotificationService.failedOperation();
-                return null;
-            });
+            return RestService.makeMicroCall(ApiService.getShoesURL());
+        }
+
+        function getShoesDetails(shoeId) {
+            return RestService.makeMicroCall(ApiService.getShoesURL() + "/" + shoeId);
         }
 
         return {
             getClothes: getClothes,
-            getShoes: getShoes
+            getShoes: getShoes,
+            getShoesDetails: getShoesDetails
         };
     }
 

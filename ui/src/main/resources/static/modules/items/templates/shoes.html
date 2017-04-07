@@ -1,3 +1,3 @@
 <div ng-controller="ShoesCtrl as vm">
-    <items-list data="vm.shoes"></items-list>
+    <items-list ng-if="vm.shoesLoaded" data="vm.shoes" type="shoesDetails"></items-list>
 </div>

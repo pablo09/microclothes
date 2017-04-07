@@ -1,11 +1,32 @@
-<div>
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row" ng-repeat="row in vm.totalItemsRange">
-            <div class="col-md-4" ng-repeat="item in vm.getItemsInRow(row)">
-                <h2>{{item.id}}</h2>
-                <p>{{item.name}}</p>
-            </div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row" ng-repeat="row in vm.totalItemsRange">
+        <div class="thumbnail col-md-4" ng-repeat="item in vm.getItemsInRow(row)">
+            <h4 class="text-center"><span class="label label-info">{{item.brand}}</span></h4>
+            <!-- TODO Dodac obsluge roznych typow obrazkow, np. png -->
+            <img ng-click="vm.goToDetails(item.id)" src="data:image/jpg;base64,{{item.image}}"></img>
+            <div class="caption">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <h3>{{item.name}}</h3>
+                    </div>
+                    <div class="col-md-6 col-xs-6 price">
+                        <h3>
+                            <label>{{item.price.amount}} {{item.price.currency}}</label>
+                        </h3>
+                    </div>
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> {{'cart.favourite' | translate}}</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> {{'cart.add' | translate}}</a></div>
+                </div>
 
+                <p> </p>
+            </div>
         </div>
     </div>
+</div>

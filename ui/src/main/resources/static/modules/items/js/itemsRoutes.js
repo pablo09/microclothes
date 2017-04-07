@@ -28,6 +28,18 @@
                             templateUrl: 'modules/items/templates/shoes.html'
                         }
                     }
+                })
+                .state('shoesDetails', {
+                    url: '/details/:itemId',
+                    parent: 'shoes',
+                    views: {
+                        'content@': {
+                            templateUrl: 'modules/items/templates/shoesDetails.html'
+                        }
+                    },
+                    params: {
+                        itemId: undefined
+                    },
                 });
         }
     ]);

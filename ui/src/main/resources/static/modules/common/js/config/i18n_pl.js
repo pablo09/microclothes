@@ -23,6 +23,13 @@
                 username: 'Nazwa użytkownika',
                 password: 'Haslo'
             },
+            cart: {
+                add: 'Dodaj do koszyka',
+                favourite: 'Ulubione'
+            },
+            shoesDetails: {
+                back: 'Wróć do listy butów'
+            },
             common: {
                 yes: 'Tak',
                 no: 'Nie',
@@ -35,7 +42,10 @@
                     error: 'Wystąpił błąd podczas próby wykonania operacji',
                     success: 'Operacja zakończona sukcesem',
                     fail: 'Operacja zakończona niepowodzeniem'
-                }
+                },
+                price: 'Cena',
+                back: 'Wróć'
+
             }
         });
 
