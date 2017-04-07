@@ -1,0 +1,55 @@
+version: "2"
+services:
+  service-registry:
+    image: pzeszko/service-registry
+    environment:
+      SERVICE_HOST: registry
+      SERVICE_PORT: 8761
+
+  uaa-service:
+    image: pzeszko/uaa-service
+    environment:
+      SERVICE_PORT: 8769
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+
+  api-gateway:
+    image: pzeszko/api-gateway
+    environment:
+      SERVICE_PORT: 8765
+      REGISTRY_URL: http://service-registry:8761/eureka
+    ports:
+      - "8765:8765"
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+
+  dummy-service:
+    image: pzeszko/dummy-service
+    environment:
+      SERVICE_PORT: 8870
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+
+  user-service:
+    image: pzeszko/user-service
+    environment:
+      SERVICE_PORT: 8871
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+
+  client:
+    image: pzeszko/client
+    environment:
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - api-gateway:api-gateway
+    ports:
+      - "8080:8080"
+

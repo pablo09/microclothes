@@ -1,0 +1,11 @@
+<div>
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row" ng-repeat="row in vm.totalItemsRange">
+            <div class="col-md-4" ng-repeat="item in vm.getItemsInRow(row)">
+                <h2>{{item.id}}</h2>
+                <p>{{item.name}}</p>
+            </div>
+
+        </div>
+    </div>
