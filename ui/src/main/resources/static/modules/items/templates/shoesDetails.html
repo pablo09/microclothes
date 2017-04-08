@@ -11,7 +11,19 @@
             <!-- Precios -->
             <h6 class="title-price"><small>{{'common.price' | translate}}</small></h6>
             <h3 style="margin-top:0px;">{{vm.shoeDetails.price.amount}} {{vm.shoeDetails.price.currency}}</h3>
-
+            <h6 class="title-price"><small>{{'common.color' | translate}}</small></h6>
+            <div class="section">
+                <ul>
+                    <li class="hand" ng-repeat="color in vm.availableColors" ng-click="vm.chooseColor(color)">{{'color.' + color | translate}} <span ng-if="vm.selectedColor === color" style="color: green" class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
+                </ul>
+            </div>
+            <h6 class="title-price"><small>{{'shoesDetails.size' | translate}}</small></h6>
+            <div class="section">
+                <select ng-model="vm.selectedSize">
+                    <option ng-repeat="size in vm.availableSizes" value="{{size}}">{{size}}</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 30px"></div>
             <div class="section" style="padding-bottom:20px;">
                 <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{'cart.add' | translate}}</button>
 

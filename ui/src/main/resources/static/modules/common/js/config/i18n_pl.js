@@ -28,7 +28,15 @@
                 favourite: 'Ulubione'
             },
             shoesDetails: {
-                back: 'Wróć do listy butów'
+                back: 'Wróć do listy butów',
+                size: 'Rozmiar'
+            },
+            color: {
+                RED: 'Czerwony',
+                BLACK: 'Czarny',
+                BLUE: 'Niebieski',
+                WHITE: 'Biały',
+                GREEN: 'Zielony'
             },
             common: {
                 yes: 'Tak',
@@ -44,7 +52,8 @@
                     fail: 'Operacja zakończona niepowodzeniem'
                 },
                 price: 'Cena',
-                back: 'Wróć'
+                back: 'Wróć',
+                color: 'Kolor'
 
             }
         });

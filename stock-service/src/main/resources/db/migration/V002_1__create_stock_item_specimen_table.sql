@@ -1,0 +1,9 @@
+CREATE TABLE STOCK_ITEM (
+  id bigint NOT NULL UNIQUE,
+  item_id VARCHAR(60) NOT NULL ,
+  size VARCHAR(5) NOT NULL,
+  color VARCHAR(30) NOT NULL,
+  type VARCHAR(15) NOT NULL,
+  amount int NOT NULL,
+  PRIMARY KEY (id)
+);

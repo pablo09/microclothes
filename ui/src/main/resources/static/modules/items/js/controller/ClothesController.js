@@ -1,16 +1,22 @@
 (function () {
     'use strict';
-    function ClothesCtrl($log, $http, $state, ItemService) {
+    function ClothesCtrl($log, $http, $state, ItemService, NotificationService) {
         var vm = this;
         vm.clothes = [];
-
+        vm.clothesLoaded = null;
+        
         (function init() {
-            vm.clothes = ItemService.getClothes();
+            ItemService.getClothes().then(function(response) {
+                vm.clothes = response.data;
+                vm.clothesLoaded = true;
+            }, function(error) {
+                NotificationService.failedOperation();
+            });
 
         })();
     }
 
-    ClothesCtrl.$inject = ['$log', '$http', '$state', 'ItemService'];
+    ClothesCtrl.$inject = ['$log', '$http', '$state', 'ItemService', 'NotificationService'];
     angular
         .module('uiApp.items')
         .controller('ClothesCtrl', ClothesCtrl);

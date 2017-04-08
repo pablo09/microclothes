@@ -16,6 +16,10 @@
             return 'http://localhost:8765/api/shoes/';
         };
 
+        vm.getClothesURL = function () {
+            return 'http://localhost:8765/api/clothes/';
+        }
+
 
     });
 })();
