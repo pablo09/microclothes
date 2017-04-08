@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.client.image;
+package com.pzeszko.microclothes.clothes.client.image;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ImageDto {
-    private String shoeId;
+    private String itemId;
     private String content;
 }

@@ -1,9 +1,8 @@
-CREATE TABLE STOCK_ITEM (
+CREATE TABLE STOCK_ITEM_SPECIMEN (
   id bigint NOT NULL UNIQUE,
-  item_id VARCHAR(60) NOT NULL ,
+  stock_item_id bigint NOT NULL,
   size VARCHAR(5) NOT NULL,
-  color VARCHAR(30) NOT NULL,
-  type VARCHAR(15) NOT NULL,
   amount int NOT NULL,
+
   PRIMARY KEY (id)
 );

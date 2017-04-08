@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.client.price;
+package com.pzeszko.microclothes.clothes.client.price;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +15,6 @@ public interface PriceClient {
     @RequestMapping("/")
     List<PriceDto> getAllPrices();
 
-    @RequestMapping("/{shoeId}")
-    PriceDto getPriceForShoe(@PathVariable("shoeId") String shoeId);
+    @RequestMapping("/{itemId}")
+    PriceDto getPriceForShoe(@PathVariable("itemId") String itemId);
 }

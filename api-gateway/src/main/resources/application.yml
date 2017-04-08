@@ -28,11 +28,21 @@ zuul:
           sensitiveHeaders:
           path: /image/**
           stripPrefix: false
+    price-service:
+        sensitiveHeaders:
+        path: /price/**
+        stripPrefix: false
+    stock-service:
+        sensitiveHeaders:
+        path: /availibility/**
+        stripPrefix: false
     uaa-service:
       sensitiveHeaders:
       path: /uaa/**
       stripPrefix: false
     shoes-service: /api/shoes/**
+    clothes-service: /api/clothes/**
+
   add-proxy-headers: true
 
 security:

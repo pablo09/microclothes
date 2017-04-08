@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.client.price;
+package com.pzeszko.microclothes.clothes.client.price;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  */
 @Data
 public class PriceDto {
-    private String shoeId;
+    private String itemId;
     private BigDecimal amount;
     private String currency;
 }

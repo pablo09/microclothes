@@ -1,13 +1,13 @@
 package com.pzeszko.microclothes.shoes.web;
 
-import com.pzeszko.microclothes.shoes.client.ImageClient;
-import com.pzeszko.microclothes.shoes.client.ImageDto;
-import com.pzeszko.microclothes.shoes.dto.Shoes;
+import com.pzeszko.microclothes.shoes.dto.ShoeDetailsDto;
+import com.pzeszko.microclothes.shoes.dto.ShoesDto;
+import com.pzeszko.microclothes.shoes.service.ShoesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,14 +17,15 @@ import java.util.List;
 public class ShoesController {
 
     @Autowired
-    private ImageClient imageClient;
+    private ShoesService shoesService;
 
     @RequestMapping("/")
-    public List<Shoes> getShoes() {
-        List<ImageDto> images = imageClient.getImages();
-        return Arrays.asList(
-                new Shoes(1L, "Nike", images.get(0)),
-                new Shoes(2L,  "Adidas", images.get(1))
-        );
+    public List<ShoesDto> getShoes() {
+       return shoesService.findAllShoesDtos();
+    }
+
+    @RequestMapping("/{shoeId}")
+    public ShoeDetailsDto getShoe(@PathVariable("shoeId") String shoeId) {
+        return shoesService.findShoe(shoeId);
     }
 }

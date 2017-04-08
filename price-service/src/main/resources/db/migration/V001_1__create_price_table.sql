@@ -1,0 +1,8 @@
+CREATE TABLE PRICE (
+  id bigint NOT NULL UNIQUE,
+  item_id VARCHAR(60) NOT NULL ,
+  amount DECIMAL NOT NULL,
+  currency VARCHAR(3) NOT NULL,
+
+  PRIMARY KEY (id)
+);

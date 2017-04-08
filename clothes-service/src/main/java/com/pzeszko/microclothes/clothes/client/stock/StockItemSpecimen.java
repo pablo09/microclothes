@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.client.stock;
+package com.pzeszko.microclothes.clothes.client.stock;
 
 import lombok.Data;
 

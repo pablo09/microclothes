@@ -4,7 +4,7 @@
         var vm = this;
         vm.clothes = [];
         vm.clothesLoaded = null;
-        
+
         (function init() {
             ItemService.getClothes().then(function(response) {
                 vm.clothes = response.data;

@@ -1,6 +1,7 @@
-package com.pzeszko.microclothes.shoes.client;
+package com.pzeszko.microclothes.shoes.client.image;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface ImageClient {
 
     @RequestMapping(value = "/")
     List<ImageDto> getImages();
+
+    @RequestMapping(value = "/{itemId}")
+    ImageDto getImageForShoe(@PathVariable("itemId") String itemId);
 }

@@ -1,0 +1,7 @@
+CREATE TABLE IMAGE (
+  id bigint NOT NULL UNIQUE,
+  item_id VARCHAR(60) NOT NULL ,
+  location VARCHAR(255) NOT NULL,
+
+  PRIMARY KEY (id)
+);

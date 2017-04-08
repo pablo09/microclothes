@@ -1,9 +1,0 @@
-CREATE TABLE SHOES (
-  id VARCHAR(60) NOT NULL UNIQUE,
-  name VARCHAR(60) NOT NULL ,
-  gender VARCHAR(6) NOT NULL,
-  category VARCHAR(30) NOT NULL,
-  brand VARCHAR(30) NOT NULL,
-  description VARCHAR(600),
-  PRIMARY KEY (id)
-);

@@ -10,6 +10,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class ImageDto {
 
-    private String filename;
-    private String description;
+    private String itemId;
+    private String content;
 }

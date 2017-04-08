@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.client.stock;
+package com.pzeszko.microclothes.clothes.client.stock;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
