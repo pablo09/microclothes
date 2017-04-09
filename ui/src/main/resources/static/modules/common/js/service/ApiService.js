@@ -13,11 +13,11 @@
         };
 
         vm.getShoesURL = function() {
-            return 'http://localhost:8765/api/shoes/';
+            return 'http://localhost:8765/api/shoes';
         };
 
         vm.getClothesURL = function () {
-            return 'http://localhost:8765/api/clothes/';
+            return 'http://localhost:8765/api/clothes';
         }
 
 

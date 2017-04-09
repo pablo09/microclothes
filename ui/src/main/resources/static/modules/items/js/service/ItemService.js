@@ -15,12 +15,15 @@
             return RestService.makeMicroCall(ApiService.getShoesURL() + "/" + shoeId);
         }
 
-
+        function getClothesDetails(clothesId) {
+            return RestService.makeMicroCall(ApiService.getClothesURL() + "/" + clothesId);
+        }
 
         return {
             getClothes: getClothes,
             getShoes: getShoes,
-            getShoesDetails: getShoesDetails
+            getShoesDetails: getShoesDetails,
+            getClothesDetails: getClothesDetails
         };
     }
 

@@ -40,6 +40,18 @@
                     params: {
                         itemId: undefined
                     },
+                })
+                .state('clothesDetails', {
+                    url: '/details/:itemId',
+                    parent: 'clothes',
+                    views: {
+                        'content@': {
+                            templateUrl: 'modules/items/templates/clothesDetails.html'
+                        }
+                    },
+                    params: {
+                        itemId: undefined
+                    },
                 });
         }
     ]);
