@@ -38,6 +38,16 @@
                 WHITE: 'Biały',
                 GREEN: 'Zielony'
             },
+            account: {
+                cart: {
+                    added: 'Dodano do koszyka',
+                    removed: 'Usunięto z koszyka'
+                },
+                favourites: {
+                    added: 'Dodano do ulubionych',
+                    removed: 'Usunięto z ulubionych'
+                }
+            },
             common: {
                 yes: 'Tak',
                 no: 'Nie',
@@ -53,8 +63,11 @@
                 },
                 price: 'Cena',
                 back: 'Wróć',
-                color: 'Kolor'
-
+                color: 'Kolor',
+                name: 'Nazwa',
+                size: 'Rozmiar',
+                sum: 'Suma',
+                action: 'Akcja'
             }
         });
 

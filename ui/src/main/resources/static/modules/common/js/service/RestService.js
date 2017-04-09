@@ -15,8 +15,22 @@
             return $http(request);
         }
 
+        function makeMicroPostCall(serviceUrl, data) {
+            var request = {
+                method: 'POST',
+                url: serviceUrl,
+                headers: {
+                    "Authorization": "Bearer " + $cookies.get('access_token'),
+                    "Content-Type": "application/json"
+                },
+                data: data
+            };
+            return $http(request);
+        }
+
         return {
-            makeMicroCall: makeMicroCall
+            makeMicroCall: makeMicroCall,
+            makeMicroPostCall: makeMicroPostCall
         };
     }
 

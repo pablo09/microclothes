@@ -1,0 +1,46 @@
+<div ng-controller="AccountCtrl as vm">
+    <h1>Cart</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>{{'common.name' | translate}}</th>
+                <th>{{'common.size' | translate}}</th>
+                <th>{{'common.price' | translate}}</th>
+                <th>{{'common.action' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.cart">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.size}}</td>
+                <td>{{item.price}}</td>
+                <td ng-click="vm.removeFromCart(item.id)"><span style="color: red" class="glyphicon glyphicon-remove"></span></td>
+            </tr>
+            <tr>
+                <th colspan="4">{{'common.sum' | translate}}</th>
+                <th>{{vm.total}} PLN</th>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-success">Kup</button>
+    <br/>
+    <h1>Favourites</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>{{'common.name' | translate}}</th>
+            <th>{{'common.action' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.favourites">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td ng-click="vm.removeFromFavourites(item.id)"><span style="color: red" class="glyphicon glyphicon-remove"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

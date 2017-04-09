@@ -1,9 +1,9 @@
 (function () {
     'use strict';
-    angular.module('uiApp.items').directive('itemDetails', ['$state',
+    angular.module('uiApp.items').directive('itemDetails', ['$state', 'AccountService',
         itemDetails]);
 
-    function itemDetails($state) {
+    function itemDetails($state, AccountService) {
         return {
             restrict : 'E',
             templateUrl : 'modules/items/templates/itemDetails.html',
@@ -35,6 +35,13 @@
                 return Object.keys(data.specimens[vm.selectedColor]);
             }
 
+            vm.addToCart = function(itemId) {
+                AccountService.addToCart(itemId);
+            };
+
+            vm.addToFavourites = function(itemId) {
+                AccountService.addToFavourites(itemId);
+            };
 
             (function init() {
                 vm.itemDetails = $scope.data;

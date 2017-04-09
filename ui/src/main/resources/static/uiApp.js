@@ -13,7 +13,8 @@
             'uiApp.login',
             'uiApp.common',
             'uiApp.menu',
-            'uiApp.items'
+            'uiApp.items',
+            'uiApp.account'
         ]);
 
 })();

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function ItemService($http, ApiService, RestService, NotificationService) {
+    function ItemService($http, ApiService, RestService, NotificationService, AccountService) {
 
         function getClothes() {
           return RestService.makeMicroCall(ApiService.getClothesURL());

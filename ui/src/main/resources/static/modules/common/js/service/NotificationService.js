@@ -7,8 +7,12 @@
         var FAILED_MSG = 'common.message.fail';
 
 
-        function successfulOperation() {
-            toastr.success(getMessage(SUCCESS_MSG));
+        function successfulOperation(msg) {
+            if(msg != null && msg != undefined) {
+                toastr.success(getMessage(msg));
+            } else {
+                toastr.success(getMessage(SUCCESS_MSG));
+            }
         }
 
         function failedOperation() {

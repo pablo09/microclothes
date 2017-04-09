@@ -19,7 +19,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="vm.isLoggedUser()"><a>{{'common.hello' | translate}} {{vm.loggedUser}}</a></li>
+                    <li ui-sref="account" ng-show="vm.isLoggedUser()"><a>{{'common.hello' | translate}} {{vm.loggedUser}}</a></li>
 
                     <li ng-hide="vm.isLoggedUser()" class="active"><a ui-sref="login">{{'common.login' | translate}} <span class="sr-only">(current)</span></a></li>
                     <li ng-show="vm.isLoggedUser()" class="active"><a href="#" ng-click="vm.logout()">{{'common.logout' | translate}}<span class="sr-only">(current)</span></a></li>

@@ -1,9 +1,9 @@
 (function () {
     'use strict';
-    angular.module('uiApp.items').directive('itemsList', ['$state',
+    angular.module('uiApp.items').directive('itemsList', ['$state', 'AccountService',
         itemsList]);
 
-    function itemsList($state) {
+    function itemsList($state, AccountService) {
         return {
             restrict : 'E',
             templateUrl : 'modules/items/templates/items.html',
@@ -47,6 +47,10 @@
                 }
 
                 return items;
+            };
+
+            vm.addToFavourites = function(itemId) {
+                AccountService.addToFavourites(itemId);
             };
 
             vm.goToDetails = function(itemId) {
