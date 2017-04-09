@@ -19,7 +19,9 @@
             NotificationService.successfulOperation('account.favourites.removed');
         }
 
-
+        function buy() {
+            NotificationService.successfulOperation('account.cart.forwarded');
+        }
 
         function getCart() {
             return [
@@ -57,7 +59,8 @@
             getCart: getCart,
             getFavourites: getFavourites,
             removeFromCart: removeFromCart,
-            removeFromFavourites: removeFromFavourites
+            removeFromFavourites: removeFromFavourites,
+            buy: buy
         };
     }
 

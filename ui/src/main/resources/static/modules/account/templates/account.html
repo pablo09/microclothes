@@ -1,5 +1,6 @@
 <div ng-controller="AccountCtrl as vm">
-    <h1>Cart</h1>
+    Historia zamowien
+    <h1>{{'account.cart.title' | translate}}</h1>
     <table class="table">
         <thead>
             <tr>
@@ -24,9 +25,13 @@
             </tr>
         </tbody>
     </table>
-    <button class="btn btn-success">Kup</button>
+    <div class="row">
+        <div class="col-md-col-md-offset-3">
+            <button ng-click="vm.buy()" class="btn btn-success pull-right">{{'account.cart.buy' | translate}}</button>
+        </div>
+    </div>
     <br/>
-    <h1>Favourites</h1>
+    <h1>{{'account.favourites.title' | translate}}</h1>
     <table class="table">
         <thead>
         <tr>

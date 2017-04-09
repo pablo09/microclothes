@@ -25,7 +25,7 @@
             },
             cart: {
                 add: 'Dodaj do koszyka',
-                favourite: 'Ulubione'
+                favourite: 'Ulubione',
             },
             shoesDetails: {
                 back: 'Wróć do listy butów',
@@ -40,10 +40,14 @@
             },
             account: {
                 cart: {
+                    title: 'Koszyk',
                     added: 'Dodano do koszyka',
-                    removed: 'Usunięto z koszyka'
+                    removed: 'Usunięto z koszyka',
+                    buy: 'Zrealizuj zamówienie',
+                    forwarded: 'Przekazano do realizacji'
                 },
                 favourites: {
+                    title: 'Ulubione',
                     added: 'Dodano do ulubionych',
                     removed: 'Usunięto z ulubionych'
                 }
