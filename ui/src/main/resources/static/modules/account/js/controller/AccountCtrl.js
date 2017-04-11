@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    function AccountCtrl($log, $http, $state, AccountService) {
+    function AccountCtrl($log, $http, $state, AccountService, NotificationService) {
         var vm = this;
         vm.cart = {};
         vm.cart.items = [];
@@ -8,8 +8,13 @@
         vm.total = 0;
 
         vm.removeFromCart = function(itemId) {
-            AccountService.removeFromCart(itemId);
-            vm.cart = removeFromCart(itemId);
+            AccountService.removeFromCart(itemId).then(function(response) {
+                removeFromCart(itemId);
+                NotificationService.successfulOperation();
+            }, function(error) {
+                NotificationService.operationFailed();
+            });
+            ;
         };
 
         vm.removeFromFavourites = function(itemId) {
@@ -22,7 +27,8 @@
         }
 
         function removeFromCart(itemId) {
-            return _.remove(vm.cart, {id: itemId});
+            console.log(vm.cart.items);
+            return _.remove(vm.cart.items, {specimenId: itemId});
         }
 
         function removeFromFavourites(itemId) {
@@ -51,7 +57,7 @@
         })();
     }
 
-    AccountCtrl.$inject = ['$log', '$http', '$state', 'AccountService'];
+    AccountCtrl.$inject = ['$log', '$http', '$state', 'AccountService', 'NotificationService'];
     angular
         .module('uiApp.account')
         .controller('AccountCtrl', AccountCtrl);

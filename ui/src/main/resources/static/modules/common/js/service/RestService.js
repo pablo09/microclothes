@@ -3,9 +3,12 @@
 
     function RestService($http, $cookies) {
 
-        function makeMicroCall(serviceUrl) {
+        function makeMicroCall(serviceUrl, method) {
+            if(_.isNil(method)) {
+                method = 'GET';
+            }
             var request = {
-                method: 'GET',
+                method: method,
                 url: serviceUrl,
                 headers: {
                     "Authorization": "Bearer " + $cookies.get('access_token'),
@@ -15,22 +18,8 @@
             return $http(request);
         }
 
-        function makeMicroPostCall(serviceUrl, data) {
-            var request = {
-                method: 'POST',
-                url: serviceUrl,
-                headers: {
-                    "Authorization": "Bearer " + $cookies.get('access_token'),
-                    "Content-Type": "application/json"
-                },
-                data: data
-            };
-            return $http(request);
-        }
-
         return {
-            makeMicroCall: makeMicroCall,
-            makeMicroPostCall: makeMicroPostCall
+            makeMicroCall: makeMicroCall
         };
     }
 

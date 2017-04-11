@@ -1,9 +1,9 @@
 (function () {
     'use strict';
-    angular.module('uiApp.items').directive('itemDetails', ['$state', 'AccountService',
+    angular.module('uiApp.items').directive('itemDetails', ['$state', 'AccountService', 'NotificationService',
         itemDetails]);
 
-    function itemDetails($state, AccountService) {
+    function itemDetails($state, AccountService, NotificationService) {
         return {
             restrict : 'E',
             templateUrl : 'modules/items/templates/itemDetails.html',
@@ -19,16 +19,17 @@
             var vm = this;
             vm.itemDetails = {};
             vm.selectedColor = null;
-            vm.selectedSize = null;
+            vm.selectedSize = {};
 
             vm.chooseColor = function(color) {
                 vm.selectedColor = color;
                 vm.availableSizes = getAvailableSizes(vm.itemDetails);
+                console.log(vm.availableSizes);
                 vm.selectedSize = vm.availableSizes[0];
             };
 
             vm.isAvailableForPurchase = function() {
-                return vm.itemDetails.specimens[vm.selectedColor][vm.selectedSize]['amount'] > 0;
+                return vm.itemDetails.specimens[vm.selectedColor][vm.selectedSize.size]['amount'] > 0;
             };
 
 
@@ -38,15 +39,26 @@
             }
 
             function getAvailableSizes(data) {
-                return Object.keys(data.specimens[vm.selectedColor]);
+                var sizes = [];
+                angular.forEach(data.specimens[vm.selectedColor], function(key, value) {
+                   sizes.push({
+                       id: key.id,
+                       size: value
+                   });
+                });
+                return sizes;
             }
 
-            vm.addToCart = function(itemId) {
-                AccountService.addToCart(itemId);
+            vm.addToCart = function() {
+                AccountService.addToCart(vm.selectedSize.id).then(function(response) {
+                    NotificationService.successfulOperation();
+                }, function(error) {
+                    NotificationService.failedOperation();
+                });
             };
 
-            vm.addToFavourites = function(itemId) {
-                AccountService.addToFavourites(itemId);
+            vm.addToFavourites = function() {
+                AccountService.addToFavourites(vm.selectedSize.id);
             };
 
             (function init() {
@@ -55,6 +67,7 @@
                 vm.availableColors = getAvailableColors(vm.itemDetails);
                 vm.selectedColor = vm.availableColors[0];
                 vm.availableSizes = getAvailableSizes(vm.itemDetails);
+                console.log(vm.availableSizes);
                 vm.selectedSize = vm.availableSizes[0];
             })();
         }

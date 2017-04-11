@@ -4,15 +4,15 @@
     function AccountService($http, $rootScope, ApiService, NotificationService, RestService) {
 
         function addToCart(itemId) {
-            NotificationService.successfulOperation('account.cart.added');
+            return RestService.makeMicroCall(ApiService.getAccountURL() + '/' + itemId, 'PUT');
+        }
+
+        function removeFromCart(itemId) {
+            return RestService.makeMicroCall(ApiService.getAccountURL() + '/' + itemId, 'DELETE');
         }
 
         function addToFavourites(itemId) {
             NotificationService.successfulOperation('account.favourites.added');
-        }
-
-        function removeFromCart(itemId) {
-            NotificationService.successfulOperation('account.cart.removed');
         }
 
         function removeFromFavourites(itemId) {

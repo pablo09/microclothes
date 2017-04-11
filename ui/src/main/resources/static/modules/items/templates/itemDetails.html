@@ -19,15 +19,15 @@
             </div>
             <h6 class="title-price"><small>{{'common.size' | translate}}</small></h6>
             <div class="section">
-                <select ng-model="vm.selectedSize">
-                    <option ng-repeat="size in vm.availableSizes" value="{{size}}">{{size}}</option>
+                <select ng-model="vm.selectedSize"
+                    ng-options="size.size for size in vm.availableSizes">
                 </select>
             </div>
             <div style="margin-bottom: 30px"></div>
             <div class="section" style="padding-bottom:20px;">
-                <button ng-disabled="!vm.isAvailableForPurchase()" class="btn btn-success" ng-click="vm.addToCart(item.id)"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{'cart.add' | translate}}</button>
+                <button ng-disabled="!vm.isAvailableForPurchase()" class="btn btn-success" ng-click="vm.addToCart()"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{'cart.add' | translate}}</button>
 
-                <h6><a ng-click="vm.addToFavourites(itemId)"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span>{{'cart.favourite' | translate}}</a></h6>
+                <h6><a ng-click="vm.addToFavourites()"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span>{{'cart.favourite' | translate}}</a></h6>
                 <br/>
                 <button class="btn btn-info" onclick="window.history.back()">{{'shoesDetails.back' | translate}}</button>
             </div>
