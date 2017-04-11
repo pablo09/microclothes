@@ -13,11 +13,12 @@ public class StockItemSpecimenMapper {
     public StockItemSpecimenDto map(StockItemSpecimen specimen) {
         StockItemSpecimenDto dto = new StockItemSpecimenDto();
 
-        dto.setItemId(specimen.getItem().getItemId());
+        dto.setItemId(specimen.getId());
         dto.setColor(specimen.getItem().getColor());
         dto.setAmount(specimen.getAmount());
         dto.setSize(specimen.getSize());
         dto.setType(specimen.getItem().getType().name());
+        dto.setItem(specimen.getItem().getItemId());
 
         return dto;
     }

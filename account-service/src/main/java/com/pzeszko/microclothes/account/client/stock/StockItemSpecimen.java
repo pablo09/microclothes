@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.client.stock;
+package com.pzeszko.microclothes.account.client.stock;
 
 import lombok.Data;
 
@@ -9,6 +9,8 @@ import lombok.Data;
 public class StockItemSpecimen {
 
     private Long itemId;
+
+    private String item;
 
     private String color;
 

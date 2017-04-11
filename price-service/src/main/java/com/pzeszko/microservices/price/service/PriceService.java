@@ -1,5 +1,6 @@
 package com.pzeszko.microservices.price.service;
 
+import com.pzeszko.microservices.price.dto.PricesRequestDto;
 import com.pzeszko.microservices.price.model.Price;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface PriceService {
     List<Price> getAllPrices();
 
     Price getPrice(String shoe);
+
+    List<Price> getPrices(PricesRequestDto dto);
 }

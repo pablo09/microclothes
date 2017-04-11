@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.stock.dto;
+package com.pzeszko.microclothes.account.client.stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class StockItemDto {
-    private Long itemId;
+    private String itemId;
     private Long stockItemId;
 }

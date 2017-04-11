@@ -2,9 +2,11 @@ package com.pzeszko.microclothes.shoes.web;
 
 import com.pzeszko.microclothes.shoes.dto.ShoeDetailsDto;
 import com.pzeszko.microclothes.shoes.dto.ShoesDto;
+import com.pzeszko.microclothes.shoes.dto.ShoesInfoRequestDto;
 import com.pzeszko.microclothes.shoes.service.ShoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,5 +29,10 @@ public class ShoesController {
     @RequestMapping("/{shoeId}")
     public ShoeDetailsDto getShoe(@PathVariable("shoeId") String shoeId) {
         return shoesService.findShoe(shoeId);
+    }
+
+    @RequestMapping("/shoesInfo")
+    public List<ShoesDto> getShoesInfo(@RequestBody ShoesInfoRequestDto requestDto) {
+        return shoesService.getShoesInfo(requestDto);
     }
 }

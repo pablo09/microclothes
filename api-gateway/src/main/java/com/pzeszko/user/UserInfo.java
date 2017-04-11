@@ -6,6 +6,7 @@ import java.security.Principal;
  * Created by Admin on 06.04.2017.
  */
 public class UserInfo {
+
     private String username;
 
     public UserInfo(Principal principal) {

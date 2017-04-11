@@ -16,4 +16,6 @@ public class ShoesDto {
     private String brand;
     private String image;
     private Price price;
+
+
 }

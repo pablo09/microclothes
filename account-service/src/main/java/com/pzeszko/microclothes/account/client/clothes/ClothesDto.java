@@ -1,5 +1,6 @@
-package com.pzeszko.microclothes.clothes.dto;
+package com.pzeszko.microclothes.account.client.clothes;
 
+import com.pzeszko.microclothes.account.client.shoes.Price;
 import lombok.Data;
 
 /**

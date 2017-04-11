@@ -1,5 +1,6 @@
 package com.pzeszko.microservices.price.service;
 
+import com.pzeszko.microservices.price.dto.PricesRequestDto;
 import com.pzeszko.microservices.price.model.Price;
 import com.pzeszko.microservices.price.repository.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,13 @@ public class PriceServiceImpl implements PriceService{
     @Override
     public Price getPrice(String item) {
         return priceRepository.findByItemId(item);
+    }
+
+    @Override
+    public List<Price> getPrices(PricesRequestDto dto) {
+        List<Price> l1 = priceRepository.findByItemId(dto.getIds());
+        List<Price> l2 = priceRepository.findByItemIdIn(dto.getIds());
+
+        return l2;
     }
 }

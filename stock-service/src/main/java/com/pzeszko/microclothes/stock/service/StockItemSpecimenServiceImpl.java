@@ -1,5 +1,7 @@
 package com.pzeszko.microclothes.stock.service;
 
+import com.pzeszko.microclothes.stock.dto.StockItemDto;
+import com.pzeszko.microclothes.stock.dto.StockItemInfoRequestDto;
 import com.pzeszko.microclothes.stock.dto.StockItemSpecimenDto;
 import com.pzeszko.microclothes.stock.mapper.StockItemSpecimenMapper;
 import com.pzeszko.microclothes.stock.model.StockItemSpecimen;
@@ -37,5 +39,16 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
     @Override
     public List<StockItemSpecimenDto> findStockDtosByItemId(String itemId) {
         return stockItemSpecimenRepository.findByItemItemId(itemId).stream().map(item -> stockItemSpecimenMapper.map(item)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StockItemSpecimenDto> findStockItemSpecimensByIds(StockItemInfoRequestDto request) {
+        return stockItemSpecimenRepository.findAll(request.getIds()).stream().map(item -> stockItemSpecimenMapper.map((item))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StockItemDto> getItemIdsForStockItems(StockItemInfoRequestDto request) {
+        List<StockItemSpecimen> stockItems = stockItemSpecimenRepository.findAll(request.getIds());
+        return stockItems.stream().map(stock -> new StockItemDto(stock.getItem().getItemId(), stock.getId())).collect(Collectors.toList());
     }
 }

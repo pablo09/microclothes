@@ -73,6 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        //TODO Smelly configuration, reconsider /**
         http.authorizeRequests().antMatchers("/uaa/**", "/login", "/**", "/user/*").permitAll().anyRequest().authenticated()
             .and()
             .csrf().requireCsrfProtectionMatcher(csrfRequestMatcher()).csrfTokenRepository(csrfTokenRepository())
@@ -109,6 +110,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             // Disable CSFR protection on the following urls:
             private final AntPathRequestMatcher[] requestMatchers = {
+                                    new AntPathRequestMatcher("/**"), //TODO TEMPORARY DISABLED CSRF
                                     new AntPathRequestMatcher("/uaa/**"),
                                     new AntPathRequestMatcher("/user/register")
             };

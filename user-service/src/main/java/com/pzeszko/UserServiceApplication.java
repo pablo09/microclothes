@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class UserServiceApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceApplication.class);
-
+    //TODO Refactor this to use database
     public static void main(String[] args) {
         REGISTERED_USERS.put("user", new UserModel(1,"user", "password", "USER"));
         REGISTERED_USERS.put("admin", new UserModel(2, "admin", "admin", "ADMIN"));

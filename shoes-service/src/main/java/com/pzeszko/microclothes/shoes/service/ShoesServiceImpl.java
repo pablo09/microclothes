@@ -9,6 +9,7 @@ import com.pzeszko.microclothes.shoes.client.stock.StockClient;
 import com.pzeszko.microclothes.shoes.client.stock.StockItemSpecimen;
 import com.pzeszko.microclothes.shoes.dto.ShoeDetailsDto;
 import com.pzeszko.microclothes.shoes.dto.ShoesDto;
+import com.pzeszko.microclothes.shoes.dto.ShoesInfoRequestDto;
 import com.pzeszko.microclothes.shoes.mapper.ShoesMapper;
 import com.pzeszko.microclothes.shoes.model.Shoes;
 import com.pzeszko.microclothes.shoes.repository.ShoesRepository;
@@ -65,6 +66,11 @@ public class ShoesServiceImpl implements ShoesService {
         List<StockItemSpecimen> specimens = stockClient.getAllItemsSpeciman(shoeId);
 
         return shoesMapper.mapDetails(shoe, image, price, specimens);
+    }
+
+    @Override
+    public List<ShoesDto> getShoesInfo(ShoesInfoRequestDto requestDto) {
+        return shoesRepository.findAll(requestDto.getIds()).stream().map(s -> shoesMapper.map(s, null, null)).collect(Collectors.toList());
     }
 
     private ImageDto findImageForShoe(Shoes shoe, List<ImageDto> images) {

@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ShoesRepository extends JpaRepository<Shoes, String> {
-
 }

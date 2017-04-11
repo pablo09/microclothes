@@ -16,5 +16,5 @@ public class ShoeDetailsDto {
     private String category;
     private String description;
     private Price price;
-    private Map<String,  Map<String, Integer>> specimens;
+    private Map<String,  Map<String, SpecimenInfo>> specimens;
 }

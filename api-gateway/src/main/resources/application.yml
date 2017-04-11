@@ -42,6 +42,7 @@ zuul:
       stripPrefix: false
     shoes-service: /api/shoes/**
     clothes-service: /api/clothes/**
+    account-service: /api/account/**
 
   add-proxy-headers: true
 

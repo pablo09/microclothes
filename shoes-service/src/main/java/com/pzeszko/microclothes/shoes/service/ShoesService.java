@@ -2,6 +2,7 @@ package com.pzeszko.microclothes.shoes.service;
 
 import com.pzeszko.microclothes.shoes.dto.ShoeDetailsDto;
 import com.pzeszko.microclothes.shoes.dto.ShoesDto;
+import com.pzeszko.microclothes.shoes.dto.ShoesInfoRequestDto;
 import com.pzeszko.microclothes.shoes.model.Shoes;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ShoesService {
     List<ShoesDto> findAllShoesDtos();
 
     ShoeDetailsDto findShoe(String shoeId);
+
+    List<ShoesDto> getShoesInfo(ShoesInfoRequestDto requestDto);
 }

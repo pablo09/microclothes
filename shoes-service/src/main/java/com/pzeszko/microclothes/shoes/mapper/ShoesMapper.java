@@ -6,6 +6,7 @@ import com.pzeszko.microclothes.shoes.client.stock.StockItemSpecimen;
 import com.pzeszko.microclothes.shoes.dto.Price;
 import com.pzeszko.microclothes.shoes.dto.ShoeDetailsDto;
 import com.pzeszko.microclothes.shoes.dto.ShoesDto;
+import com.pzeszko.microclothes.shoes.dto.SpecimenInfo;
 import com.pzeszko.microclothes.shoes.model.Shoes;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +61,7 @@ public class ShoesMapper {
 
     private void addSpecimensInfo(List<StockItemSpecimen> specimens, ShoeDetailsDto dto) {
         if(specimens != null) {
-            Map<String, Map<String, Integer>> specimenInfoMap = new HashMap<>();
+            Map<String, Map<String, SpecimenInfo>> specimenInfoMap = new HashMap<>();
             Set<String> availableColors = specimens.stream().map(s -> s.getColor()).collect(toSet());
             setSizeAmountForAllColors(specimens, specimenInfoMap, availableColors);
 
@@ -68,12 +69,12 @@ public class ShoesMapper {
         }
     }
 
-    private void setSizeAmountForAllColors(List<StockItemSpecimen> specimens, Map<String, Map<String, Integer>> specimenInfoMap, Set<String> availableColors) {
+    private void setSizeAmountForAllColors(List<StockItemSpecimen> specimens, Map<String, Map<String, SpecimenInfo>> specimenInfoMap, Set<String> availableColors) {
         for(String color: availableColors) {
-            Map<String, Integer> sizeAmountMap = new HashMap<>();
+            Map<String, SpecimenInfo> sizeAmountMap = new HashMap<>();
 
             specimens.stream().filter(s -> s.getColor().equals(color)).forEach(s -> {
-                sizeAmountMap.put(s.getSize(), s.getAmount());
+                sizeAmountMap.put(s.getSize(), new SpecimenInfo(s.getItemId(), s.getAmount()));
             });
 
             specimenInfoMap.put(color, sizeAmountMap);

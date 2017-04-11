@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class StockItemSpecimen {
 
-    private String itemId;
+    private Long itemId;
 
     private String color;
 

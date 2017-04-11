@@ -5,7 +5,10 @@ import com.pzeszko.microclothes.clothes.client.image.ImageDto;
 import com.pzeszko.microclothes.clothes.client.price.PriceClient;
 import com.pzeszko.microclothes.clothes.client.price.PriceDto;
 import com.pzeszko.microclothes.clothes.client.stock.StockClient;
+import com.pzeszko.microclothes.clothes.client.stock.StockItemSpecimen;
+import com.pzeszko.microclothes.clothes.dto.ClothesDetailsDto;
 import com.pzeszko.microclothes.clothes.dto.ClothesDto;
+import com.pzeszko.microclothes.clothes.dto.ClothesInfoRequestDto;
 import com.pzeszko.microclothes.clothes.mapper.ClothesMapper;
 import com.pzeszko.microclothes.clothes.model.Clothes;
 import com.pzeszko.microclothes.clothes.repository.ClothesRepository;
@@ -51,6 +54,21 @@ public class ClothesServiceImpl implements ClothesService {
     @Override
     public ClothesDto findOne(String itemId) {
         return null;
+    }
+
+    @Override
+    public ClothesDetailsDto findClothesDetails(String itemId) {
+        Clothes clothes = clothesRepository.findOne(itemId);
+        List<ImageDto> images = imageClient.getImages();
+        List<PriceDto> priceDtos = priceClient.getAllPrices();
+        List<StockItemSpecimen> stockItemSpecimens = stockClient.getAllItemsSpeciman(itemId);
+
+        return clothesMapper.mapDetails(clothes, findImageForClothes(clothes, images), findPriceForClothes(clothes, priceDtos), stockItemSpecimens);
+    }
+
+    @Override
+    public List<ClothesDto> getClothesInfo(ClothesInfoRequestDto clothesInfoRequestDto) {
+        return clothesRepository.findAll(clothesInfoRequestDto.getIds()).stream().map(c -> clothesMapper.map(c, null, null)).collect(Collectors.toList());
     }
 
     private ImageDto findImageForClothes(Clothes clothes, List<ImageDto> images) {

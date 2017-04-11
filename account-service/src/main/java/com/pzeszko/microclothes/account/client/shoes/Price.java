@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.shoes.dto;
+package com.pzeszko.microclothes.account.client.shoes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

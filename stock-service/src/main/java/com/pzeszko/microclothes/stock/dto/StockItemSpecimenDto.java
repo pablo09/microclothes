@@ -7,7 +7,9 @@ import lombok.Data;
  */
 @Data
 public class StockItemSpecimenDto {
-    private String itemId;
+    private Long itemId;
+
+    private String item;
 
     private String color;
 
