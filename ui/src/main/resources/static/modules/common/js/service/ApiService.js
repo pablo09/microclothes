@@ -5,21 +5,24 @@
         var vm = this;
 
         vm.getBaseApiURL = function () {
-            return '/api';
+            return 'http://localhost:8765';
         };
 
         vm.getTokenAccessURL = function () {
-            return 'http://localhost:8765/uaa/oauth/token';
+            return vm.getBaseApiURL() + '/uaa/oauth/token';
         };
 
         vm.getShoesURL = function() {
-            return 'http://localhost:8765/api/shoes';
+            return vm.getBaseApiURL() + '/api/shoes';
         };
 
         vm.getClothesURL = function () {
-            return 'http://localhost:8765/api/clothes';
-        }
+            return vm.getBaseApiURL() + '/api/clothes';
+        };
 
+        vm.getAccountURL = function() {
+            return vm.getBaseApiURL() + '/api/account';
+        }
 
     });
 })();

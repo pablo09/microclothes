@@ -1,0 +1,22 @@
+<div ng-controller="OrderHistoryCtrl as vm">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{'order.date' | translate}}</th>
+            <th>{{'order.price' | translate}}</th>
+            <th>{{'common.preview' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="history in vm.history">
+            <td>{{history.date}}</td>
+            <td>{{history.price}}</td>
+            <td>preview</td>
+        </tr>
+        <tr>
+            <th colspan="4">{{'common.sum' | translate}}</th>
+            <th>{{vm.total}} PLN</th>
+        </tr>
+        </tbody>
+    </table>
+</div>

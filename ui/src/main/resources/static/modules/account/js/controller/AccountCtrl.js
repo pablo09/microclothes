@@ -3,6 +3,7 @@
     function AccountCtrl($log, $http, $state, AccountService) {
         var vm = this;
         vm.cart = {};
+        vm.cart.items = [];
         vm.favourites = {};
         vm.total = 0;
 
@@ -29,22 +30,24 @@
         }
 
         function countTotal() {
-            //TODO Refactor using Lodash
-            var numberPattern = /\d+/g;
             var sum = 0;
 
-            angular.forEach(vm.cart, function(key, value) {
-                    var amount = parseInt(key.price.match(numberPattern));
-                    sum += amount;
+            angular.forEach(vm.cart.items, function(key, value) {
+                    sum += key.price.amount;
             });
 
             return sum;
         }
 
         (function init() {
-            vm.cart = AccountService.getCart();
-            vm.favourites = AccountService.getFavourites();
-            vm.total = countTotal();
+            AccountService.getCart().then(function(response) {
+                vm.cart = response.data;
+                vm.favourites = AccountService.getFavourites();
+                vm.total = countTotal();
+
+            }, function(error) {});
+
+
         })();
     }
 

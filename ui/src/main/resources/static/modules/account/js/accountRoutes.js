@@ -17,6 +17,17 @@
                     },
                     resolve: {
                     }
+                })
+                .state('history', {
+                    url: '/history',
+                    parent: 'account',
+                    views: {
+                        'content@': {
+                            templateUrl: 'modules/account/templates/orderHistory.html'
+                        }
+                    },
+                    resolve: {
+                    }
                 });
         }
     ]);

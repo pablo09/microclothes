@@ -17,7 +17,7 @@
                     <li class="hand" ng-repeat="color in vm.availableColors" ng-click="vm.chooseColor(color)">{{'color.' + color | translate}} <span ng-if="vm.selectedColor === color" style="color: green" class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
                 </ul>
             </div>
-            <h6 class="title-price"><small>{{'shoesDetails.size' | translate}}</small></h6>
+            <h6 class="title-price"><small>{{'common.size' | translate}}</small></h6>
             <div class="section">
                 <select ng-model="vm.selectedSize">
                     <option ng-repeat="size in vm.availableSizes" value="{{size}}">{{size}}</option>
@@ -25,7 +25,7 @@
             </div>
             <div style="margin-bottom: 30px"></div>
             <div class="section" style="padding-bottom:20px;">
-                <button class="btn btn-success" ng-click="vm.addToCart(item.id)"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{'cart.add' | translate}}</button>
+                <button ng-disabled="!vm.isAvailableForPurchase()" class="btn btn-success" ng-click="vm.addToCart(item.id)"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{'cart.add' | translate}}</button>
 
                 <h6><a ng-click="vm.addToFavourites(itemId)"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span>{{'cart.favourite' | translate}}</a></h6>
                 <br/>

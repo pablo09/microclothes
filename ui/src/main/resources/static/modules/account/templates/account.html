@@ -4,23 +4,25 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>{{'common.name' | translate}}</th>
                 <th>{{'common.size' | translate}}</th>
+                <th>{{'common.color' | translate}}</th>
                 <th>{{'common.price' | translate}}</th>
                 <th>{{'common.action' | translate}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in vm.cart">
-                <td>{{item.id}}</td>
+            <tr ng-repeat="item in vm.cart.items">
+                <td>{{$index + 1}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.size}}</td>
-                <td>{{item.price}}</td>
+                <td>{{item.color}}</td>
+                <td>{{item.price.amount}} {{item.price.currency}}</td>
                 <td ng-click="vm.removeFromCart(item.id)"><span style="color: red" class="glyphicon glyphicon-remove"></span></td>
             </tr>
             <tr>
-                <th colspan="4">{{'common.sum' | translate}}</th>
+                <th colspan="5">{{'common.sum' | translate}}</th>
                 <th>{{vm.total}} PLN</th>
             </tr>
         </tbody>

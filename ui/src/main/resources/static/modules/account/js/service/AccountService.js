@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function AccountService($http, ApiService, NotificationService) {
+    function AccountService($http, $rootScope, ApiService, NotificationService, RestService) {
 
         function addToCart(itemId) {
             NotificationService.successfulOperation('account.cart.added');
@@ -24,20 +24,7 @@
         }
 
         function getCart() {
-            return [
-                {
-                    id: 1,
-                    name: 'Some shoes',
-                    size: '44.5',
-                    price: '240 PLN'
-                },
-                {
-                    id: 2,
-                    name: 'Some clothes',
-                    size: 'L',
-                    price: '310 PLN'
-                }
-            ];
+            return RestService.makeMicroCall( ApiService.getAccountURL());
         }
 
         function getFavourites() {
@@ -64,6 +51,6 @@
         };
     }
 
-    AccountService.$inject = ['$http', 'ApiService','NotificationService'];
+    AccountService.$inject = ['$http', '$rootScope', 'ApiService','NotificationService', 'RestService'];
     angular.module('uiApp.account').service('AccountService', AccountService);
 })();

@@ -52,6 +52,10 @@
                     removed: 'Usunięto z ulubionych'
                 }
             },
+            order: {
+                date: 'Data zamówienia',
+                price: 'Kwota'
+            },
             common: {
                 yes: 'Tak',
                 no: 'Nie',
@@ -71,7 +75,8 @@
                 name: 'Nazwa',
                 size: 'Rozmiar',
                 sum: 'Suma',
-                action: 'Akcja'
+                action: 'Akcja',
+                preview: 'Podgląd'
             }
         });
 

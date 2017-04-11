@@ -17,14 +17,20 @@
 
         function controller($scope) {
             var vm = this;
-            vm.shoeDetails = {};
+            vm.itemDetails = {};
             vm.selectedColor = null;
             vm.selectedSize = null;
 
             vm.chooseColor = function(color) {
                 vm.selectedColor = color;
-                vm.availableSizes = getAvailableSizes(vm.shoeDetails);
+                vm.availableSizes = getAvailableSizes(vm.itemDetails);
+                vm.selectedSize = vm.availableSizes[0];
             };
+
+            vm.isAvailableForPurchase = function() {
+                return vm.itemDetails.specimens[vm.selectedColor][vm.selectedSize]['amount'] > 0;
+            };
+
 
             function getAvailableColors(data) {
                 //TODO obsluga w przypadku braku towaru
