@@ -32,22 +32,4 @@
             <button ng-click="vm.finalizeOrder()" class="btn btn-success pull-right">{{'account.cart.buy' | translate}}</button>
         </div>
     </div>
-    <br/>
-    <h1>{{'account.favourites.title' | translate}}</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>{{'common.name' | translate}}</th>
-            <th>{{'common.action' | translate}}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="item in vm.favourites">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td ng-click="vm.removeFromFavourites(item.id)"><span style="color: red" class="glyphicon glyphicon-remove"></span></td>
-        </tr>
-        </tbody>
-    </table>
 </div>

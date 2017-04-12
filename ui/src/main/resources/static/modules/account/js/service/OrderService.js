@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function OrderService($http, $rootScope, ApiService, NotificationService, RestService) {
+    function OrderService(ApiService, RestService) {
 
         function finalizeOrder(items) {
             var ids = _.map(items, 'specimenId');
@@ -21,6 +21,6 @@
         };
     }
 
-    OrderService.$inject = ['$http', '$rootScope', 'ApiService', 'NotificationService', 'RestService'];
+    OrderService.$inject = ['ApiService', 'RestService'];
     angular.module('uiApp.account').service('OrderService', OrderService);
 })();

@@ -4,7 +4,6 @@
         var vm = this;
         vm.cart = {};
         vm.cart.items = [];
-        vm.favourites = {};
         vm.total = 0;
 
         vm.removeFromCart = function(itemId) {
@@ -15,11 +14,6 @@
                 NotificationService.operationFailed();
             });
             ;
-        };
-
-        vm.removeFromFavourites = function(itemId) {
-            AccountService.removeFromFavourites();
-            vm.favourites = removeFromFavourites(itemId);
         };
 
         vm.finalizeOrder = function() {
@@ -35,9 +29,6 @@
             return _.remove(vm.cart.items, {specimenId: itemId});
         }
 
-        function removeFromFavourites(itemId) {
-            return _.remove(vm.favourites, {id: itemId});
-        }
 
         function countTotal() {
             var sum = 0;
@@ -52,7 +43,6 @@
         (function init() {
             AccountService.getCart().then(function(response) {
                 vm.cart = response.data;
-                vm.favourites = AccountService.getFavourites();
                 vm.total = countTotal();
 
             }, function(error) {});
