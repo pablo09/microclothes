@@ -13,4 +13,6 @@ public interface OrderService {
     void finalizeOrder(OrderDto orderDto);
 
     List<OrderDetailsDto> getOrders(String username);
+
+    List<OrderDetailsDto> getAllOrders();
 }

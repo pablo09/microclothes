@@ -1,5 +1,6 @@
 package com.pzeszko.microclothes.order.service;
 
+import com.pzeszko.microclothes.order.client.account.AccountClient;
 import com.pzeszko.microclothes.order.client.clothes.ClothesClient;
 import com.pzeszko.microclothes.order.client.clothes.ClothesDto;
 import com.pzeszko.microclothes.order.client.clothes.ClothesInfoRequestDto;
@@ -44,13 +45,11 @@ public class OrderServiceImpl implements OrderService {
     private final StockClient stockClient;
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-
+    private final AccountClient accountClient;
 
     @Transactional
     @Override
     public void finalizeOrder(OrderDto orderDto) {
-        stockClient.buyItem(new StockItemInfoRequestDto(orderDto.getSpecimenIds()));
-
         List<StockItemSpecimen> specimens = stockClient.getAllRequestedSpecimens(new StockItemInfoRequestDto(orderDto.getSpecimenIds()));
 
         List<String> itemIds = specimens.stream().map(s -> s.getItem()).collect(Collectors.toList());
@@ -61,6 +60,14 @@ public class OrderServiceImpl implements OrderService {
         List<ShoesDto> shoesList = shoesClient.getShoesInfo(new ShoesInfoRequestDto(shoesIds));
         List<ClothesDto> clothesList = clothesClient.getClothesInfo(new ClothesInfoRequestDto(clothesIds));
 
+        Order order = createOrder(specimens, prices, shoesList, clothesList);
+
+        orderRepository.save(order);
+        emptyCart();
+        stockClient.buyItem(new StockItemInfoRequestDto(orderDto.getSpecimenIds()));
+    }
+
+    private Order createOrder(List<StockItemSpecimen> specimens, List<PriceDto> prices, List<ShoesDto> shoesList, List<ClothesDto> clothesList) {
         Order order = new Order();
         List<Item> items = new ArrayList<>();
 
@@ -80,31 +87,41 @@ public class OrderServiceImpl implements OrderService {
 
             item.setColor(s.getColor());
             item.setSize(s.getSize());
-
-            PriceDto price = prices.stream().filter(p -> p.getItemId().equals(s.getItem())).findFirst().get();
-            com.pzeszko.microclothes.order.model.Price priceEntity = new Price();
-            priceEntity.setAmount(price.getAmount());
-            priceEntity.setCurrency(price.getCurrency());
-            item.setPrice((priceEntity));
+            item.setPrice(getPrice(prices, s));
 
             items.add(item);
         });
 
         order.setItems(items);
-
-        orderRepository.save(order);
+        return order;
     }
 
+    private Price getPrice(List<PriceDto> prices, StockItemSpecimen s) {
+        PriceDto price = prices.stream().filter(p -> p.getItemId().equals(s.getItem())).findFirst().get();
+        Price priceEntity = new Price();
+        priceEntity.setAmount(price.getAmount());
+        priceEntity.setCurrency(price.getCurrency());
+        return priceEntity;
+    }
+
+    @Override
+    public List<OrderDetailsDto> getOrders(String username) {
+        return orderRepository.findByUsername(username).stream().map(order -> orderMapper.map(order)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDetailsDto> getAllOrders() {
+        return orderRepository.findAll().stream().map(order -> orderMapper.map(order)).collect(Collectors.toList());
+    }
+
+    private void emptyCart() {
+        accountClient.emptyCart();
+    }
     private String getUsername() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     private List<String> getItemIdsByType(List<StockItemSpecimen> specimens, String type) {
         return specimens.stream().filter(s -> s.getType().equals(type)).map(s -> s.getItem()).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<OrderDetailsDto> getOrders(String username) {
-        return orderRepository.findByUsername(username).stream().map(order -> orderMapper.map(order)).collect(Collectors.toList());
     }
 }

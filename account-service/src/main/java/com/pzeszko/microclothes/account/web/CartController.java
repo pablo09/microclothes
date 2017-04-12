@@ -36,4 +36,10 @@ public class CartController {
         cartService.removeFromCart(itemId);
         return ResponseEntity.ok().build();
     }
+
+    @RequestMapping(value = "/emptyCart", method = RequestMethod.POST)
+    public ResponseEntity<Void> emptyCart() {
+        cartService.emptyUserCart();
+        return ResponseEntity.ok().build();
+    }
 }

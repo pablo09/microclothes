@@ -71,6 +71,13 @@ security:
 logging:
   level.org.springframework.security: DEBUG
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
 ---
 
 spring:

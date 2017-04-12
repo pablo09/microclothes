@@ -112,6 +112,13 @@ public class CartServiceImpl implements CartService{
         cart.setStockItemIds(items);
     }
 
+    @Transactional
+    @Override
+    public void emptyUserCart() {
+        Cart cart = findUserCart();
+        cart.setStockItemIds(null);
+    }
+
     private Cart findUserCart() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return cartRepository.findByUsername(username);

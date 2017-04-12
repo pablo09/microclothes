@@ -31,4 +31,9 @@ public class OrderController {
     public List<OrderDetailsDto> getOrdersForUser(Principal principal) {
         return orderService.getOrders(principal.getName());
     }
+
+    @RequestMapping("/all")
+    public List<OrderDetailsDto> getAllOrders() {
+        return orderService.getAllOrders();
+    }
 }
