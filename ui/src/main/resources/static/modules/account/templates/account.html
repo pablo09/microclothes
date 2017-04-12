@@ -1,5 +1,5 @@
 <div ng-controller="AccountCtrl as vm">
-    <a ui-sref="history">Order history</a>
+    <a ui-sref="history">{{'order.history' | translate}}</a>
     <h1>{{'account.cart.title' | translate}}</h1>
     <table class="table">
         <thead>
@@ -29,7 +29,7 @@
     </table>
     <div class="row">
         <div class="col-md-col-md-offset-3">
-            <button ng-click="vm.finalizeOrder()" class="btn btn-success pull-right">{{'account.cart.buy' | translate}}</button>
+            <button ng-disabled="vm.cart.items.length === 0" ng-click="vm.finalizeOrder()" class="btn btn-success pull-right">{{'account.cart.buy' | translate}}</button>
         </div>
     </div>
 </div>

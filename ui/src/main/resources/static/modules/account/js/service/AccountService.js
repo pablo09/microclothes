@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function AccountService($http, $rootScope, ApiService, NotificationService, RestService) {
+    function AccountService (ApiService, RestService) {
 
         function addToCart(itemId) {
             return RestService.makeMicroCall(ApiService.getAccountURL() + '/' + itemId, 'PUT');
@@ -22,6 +22,6 @@
         };
     }
 
-    AccountService.$inject = ['$http', '$rootScope', 'ApiService','NotificationService', 'RestService'];
+    AccountService.$inject = ['ApiService', 'RestService'];
     angular.module('uiApp.account').service('AccountService', AccountService);
 })();

@@ -54,7 +54,8 @@
             },
             order: {
                 date: 'Data zamówienia',
-                price: 'Kwota'
+                price: 'Kwota',
+                history: 'Historia zamówień'
             },
             common: {
                 yes: 'Tak',
@@ -76,7 +77,8 @@
                 size: 'Rozmiar',
                 sum: 'Suma',
                 action: 'Akcja',
-                preview: 'Podgląd'
+                preview: 'Podgląd',
+                back: 'Wróc'
             }
         });
 

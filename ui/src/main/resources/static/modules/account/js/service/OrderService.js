@@ -4,9 +4,8 @@
     function OrderService(ApiService, RestService) {
 
         function finalizeOrder(items) {
-            var ids = _.map(items, 'specimenId');
             var data = {};
-            data.specimenIds = ids;
+            data.specimenIds = _.map(items, 'specimenId');
 
             return RestService.makeMicroCall(ApiService.getOrderURL() + '/finalize', 'POST', data);
         }

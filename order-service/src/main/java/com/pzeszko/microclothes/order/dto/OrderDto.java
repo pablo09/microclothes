@@ -2,6 +2,7 @@ package com.pzeszko.microclothes.order.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 @Data
 public class OrderDto {
-
+    @Size(min = 1)
     private List<Long> specimenIds;
 
 

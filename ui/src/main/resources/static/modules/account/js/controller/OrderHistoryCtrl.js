@@ -18,7 +18,6 @@
 
         (function init() {
              OrderService.orderHistory().then(function(response) {
-                 console.log(response);
                  vm.history = response.data;
              }, function(error) {
                  NotificationService.failedOperation();
