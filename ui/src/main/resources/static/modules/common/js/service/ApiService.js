@@ -22,6 +22,10 @@
 
         vm.getAccountURL = function() {
             return vm.getBaseApiURL() + '/api/account';
+        };
+
+        vm.getOrderURL = function () {
+            return vm.getBaseApiURL() + '/api/order';
         }
 
     });

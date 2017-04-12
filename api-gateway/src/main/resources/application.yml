@@ -43,6 +43,7 @@ zuul:
     shoes-service: /api/shoes/**
     clothes-service: /api/clothes/**
     account-service: /api/account/**
+    order-service: /api/order/**
 
   add-proxy-headers: true
 

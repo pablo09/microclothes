@@ -1,6 +1,6 @@
 package com.pzeszko.microclothes.order.client.clothes;
 
-import com.pzeszko.microclothes.account.client.shoes.Price;
+import com.pzeszko.microclothes.order.client.price.PriceDto;
 import lombok.Data;
 
 /**
@@ -12,5 +12,5 @@ public class ClothesDto {
     private String name;
     private String brand;
     private String image;
-    private Price price;
+    private PriceDto price;
 }

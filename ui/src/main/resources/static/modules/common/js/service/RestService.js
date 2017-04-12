@@ -3,7 +3,7 @@
 
     function RestService($http, $cookies) {
 
-        function makeMicroCall(serviceUrl, method) {
+        function makeMicroCall(serviceUrl, method, data) {
             if(_.isNil(method)) {
                 method = 'GET';
             }
@@ -13,7 +13,8 @@
                 headers: {
                     "Authorization": "Bearer " + $cookies.get('access_token'),
                     "Content-Type": "application/json"
-                }
+                },
+                data: JSON.stringify(data)
             };
             return $http(request);
         }

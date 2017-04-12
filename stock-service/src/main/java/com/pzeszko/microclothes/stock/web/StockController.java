@@ -36,7 +36,8 @@ public class StockController {
 
     @RequestMapping(value = "/buyItem", method = RequestMethod.POST)
     public ResponseEntity<Void> buyItem(@RequestBody StockItemInfoRequestDto request) {
-
+        stockItemSpecimenService.buyItems(request);
+        return ResponseEntity.ok().build();
     }
 
 }

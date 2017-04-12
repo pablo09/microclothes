@@ -3,6 +3,8 @@ package com.pzeszko.microclothes.stock.service;
 import com.pzeszko.microclothes.stock.dto.StockItemDto;
 import com.pzeszko.microclothes.stock.dto.StockItemInfoRequestDto;
 import com.pzeszko.microclothes.stock.dto.StockItemSpecimenDto;
+import com.pzeszko.microclothes.stock.exception.ErrorCode;
+import com.pzeszko.microclothes.stock.exception.MicroclothesException;
 import com.pzeszko.microclothes.stock.mapper.StockItemSpecimenMapper;
 import com.pzeszko.microclothes.stock.model.StockItemSpecimen;
 import com.pzeszko.microclothes.stock.repository.StockItemSpecimenRepository;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -53,11 +56,27 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
         return stockItems.stream().map(stock -> new StockItemDto(stock.getItem().getItemId(), stock.getId())).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
-    public void buyItems(StockItemInfoRequestDto request) {
-        List<StockItemSpecimen> stockItems = stockItemSpecimenRepository.findAll(request.getIds());
+    public boolean buyItems(StockItemInfoRequestDto request) {
+        List<StockItemSpecimen> actualItems = stockItemSpecimenRepository.findAll(request.getIds());
+        Map<Long, Long> numberOfItems = request.getIds().stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        Map<Long, Long> numberOfItems = stockItems.stream().collect(Collectors.groupingBy(StockItemSpecimen::getId, Collectors.counting()));
+        for(StockItemSpecimen actualItem: actualItems) {
+            Integer oldAmount = actualItem.getAmount();
+            Integer requestedAmount = numberOfItems.get(actualItem.getId()).intValue();
+            Integer newAmount = requestedAmount;
 
+            if(oldAmount < numberOfItems.get(actualItem.getId())) {
+                throw new MicroclothesException(ErrorCode.ITEMS_NOT_AVAILABLE);
+            } else {
+                 newAmount = oldAmount - requestedAmount;
+            }
+
+            actualItem.setAmount(newAmount);
+        }
+
+        return true;
     }
+
 }

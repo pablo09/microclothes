@@ -13,4 +13,5 @@ import java.util.List;
 public interface StockItemSpecimenRepository extends JpaRepository<StockItemSpecimen, Long> {
 
     List<StockItemSpecimen> findByItemItemId(String itemId);
+
 }

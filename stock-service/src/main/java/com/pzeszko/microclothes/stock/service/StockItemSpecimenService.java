@@ -22,5 +22,5 @@ public interface StockItemSpecimenService {
 
     List<StockItemDto> getItemIdsForStockItems(StockItemInfoRequestDto request);
 
-    void buyItems(StockItemInfoRequestDto request);
+    boolean buyItems(StockItemInfoRequestDto request);
 }

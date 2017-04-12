@@ -1,9 +1,11 @@
 package com.pzeszko.microclothes.order.client.stock;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -21,4 +23,7 @@ public interface StockClient {
 
     @RequestMapping("/getItemIds")
     List<StockItemDto> getItemIds(@RequestBody StockItemInfoRequestDto request);
+
+    @RequestMapping(value = "/buyItem", method = RequestMethod.POST)
+    ResponseEntity<Void> buyItem(@RequestBody StockItemInfoRequestDto request);
 }

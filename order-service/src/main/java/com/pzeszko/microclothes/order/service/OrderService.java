@@ -1,5 +1,6 @@
 package com.pzeszko.microclothes.order.service;
 
+import com.pzeszko.microclothes.order.dto.OrderDetailsDto;
 import com.pzeszko.microclothes.order.dto.OrderDto;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface OrderService {
 
     void finalizeOrder(OrderDto orderDto);
 
-    List<?> getOrders(String username);
+    List<OrderDetailsDto> getOrders(String username);
 }

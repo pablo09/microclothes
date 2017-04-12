@@ -12,7 +12,7 @@ spring:
 
 # Define the port where the Widget Foundry server would be running
 server:
-  port: 8444
+  port: 8484
 
 # Define the Eureka server that handles service registration
 eureka:
@@ -39,7 +39,7 @@ security:
       serviceId: ${PREFIX:}resource
 
 flyway:
-  locations: classpath:db/migration, db/data
+  locations: classpath:db/migration
 ---
 
 spring:
