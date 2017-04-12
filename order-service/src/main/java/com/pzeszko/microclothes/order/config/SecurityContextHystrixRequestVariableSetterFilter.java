@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.account.config;
+package com.pzeszko.microclothes.order.config;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

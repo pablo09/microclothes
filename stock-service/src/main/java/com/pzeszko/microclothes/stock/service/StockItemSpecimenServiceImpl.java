@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -50,5 +51,13 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
     public List<StockItemDto> getItemIdsForStockItems(StockItemInfoRequestDto request) {
         List<StockItemSpecimen> stockItems = stockItemSpecimenRepository.findAll(request.getIds());
         return stockItems.stream().map(stock -> new StockItemDto(stock.getItem().getItemId(), stock.getId())).collect(Collectors.toList());
+    }
+
+    @Override
+    public void buyItems(StockItemInfoRequestDto request) {
+        List<StockItemSpecimen> stockItems = stockItemSpecimenRepository.findAll(request.getIds());
+
+        Map<Long, Long> numberOfItems = stockItems.stream().collect(Collectors.groupingBy(StockItemSpecimen::getId, Collectors.counting()));
+
     }
 }

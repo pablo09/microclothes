@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.account.config;
+package com.pzeszko.microclothes.order.config;
 
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestVariableDefault;
 import org.springframework.security.core.Authentication;

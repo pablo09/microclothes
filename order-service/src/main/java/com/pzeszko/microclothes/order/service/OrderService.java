@@ -1,7 +1,15 @@
 package com.pzeszko.microclothes.order.service;
 
+import com.pzeszko.microclothes.order.dto.OrderDto;
+
+import java.util.List;
+
 /**
  * Created by Admin on 11.04.2017.
  */
-public class OrderService {
+public interface OrderService {
+
+    void finalizeOrder(OrderDto orderDto);
+
+    List<?> getOrders(String username);
 }

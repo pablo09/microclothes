@@ -1,6 +1,6 @@
 spring:
   application:
-    name: account-service
+    name: order-service
   jpa:
     show-sql: true
     hibernate:
@@ -12,7 +12,7 @@ spring:
 
 # Define the port where the Widget Foundry server would be running
 server:
-  port: 8817
+  port: 8444
 
 # Define the Eureka server that handles service registration
 eureka:

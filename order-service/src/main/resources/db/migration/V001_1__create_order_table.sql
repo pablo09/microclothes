@@ -1,0 +1,7 @@
+CREATE TABLE ORDER (
+  ID bigint not null unique,
+  USERNAME VARCHAR(100) NOT NULL,
+  ORDER_DATE DATE not null,
+
+  PRIMARY KEY(ID)
+)

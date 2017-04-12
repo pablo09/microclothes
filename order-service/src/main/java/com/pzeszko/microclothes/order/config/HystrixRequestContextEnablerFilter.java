@@ -1,4 +1,4 @@
-package com.pzeszko.microclothes.account.config;
+package com.pzeszko.microclothes.order.config;
 
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import org.springframework.stereotype.Component;
