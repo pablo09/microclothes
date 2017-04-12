@@ -1,5 +1,6 @@
 package com.pzeszko.microclothes.order.mapper;
 
+import com.pzeszko.microclothes.order.client.price.PriceDto;
 import com.pzeszko.microclothes.order.dto.ItemDto;
 import com.pzeszko.microclothes.order.dto.OrderDetailsDto;
 import com.pzeszko.microclothes.order.model.Item;
@@ -27,13 +28,23 @@ public class OrderMapper {
             itemDto.setName(item.getName());
             itemDto.setColor(item.getColor());
             itemDto.setSize(item.getSize());
+            itemDto.setPrice(getPrice(item));
 
             itemsDto.add(itemDto);
+
         }
 
         dto.setItems(itemsDto);
 
         return dto;
+    }
+
+    private PriceDto getPrice(Item item) {
+        PriceDto price = new PriceDto();
+
+        price.setAmount(item.getPrice().getAmount());
+        price.setCurrency(item.getPrice().getCurrency());
+        return price;
     }
 
 }

@@ -9,14 +9,17 @@
         </thead>
         <tbody>
         <tr ng-repeat="history in vm.history">
-            <td>{{history.date}}</td>
-            <td>{{history.price}}</td>
-            <td>preview</td>
+            <td>{{history.orderDate}}</td>
+            <td>{{vm.getTotalPrice(history)}} {{vm.currency}}</td>
+            <td>
+                <ul>
+                    <li ng-repeat="item in history.items">
+                        {{item.name}} {{item.color}} {{item.size}} {{item.price.amount}} {{item.price.currency}}
+                    </li>
+                </ul>
+            </td>
         </tr>
-        <tr>
-            <th colspan="4">{{'common.sum' | translate}}</th>
-            <th>{{vm.total}} PLN</th>
-        </tr>
+
         </tbody>
     </table>
 </div>
