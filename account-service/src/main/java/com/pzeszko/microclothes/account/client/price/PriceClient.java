@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Admin on 07.04.2017.
  */
-@FeignClient("price-service")
+@FeignClient(name = "price-service", fallback = PriceClientFallback.class)
 public interface PriceClient {
 
     @RequestMapping("/")

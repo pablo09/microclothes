@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -67,20 +68,13 @@ public class CartServiceImpl implements CartService{
         specimens.stream().forEach(s -> {
             ItemInfoDto itemInfo = new ItemInfoDto();
 
-            if(s.getType().equals("SHOES")) {
-                ShoesDto shoe = shoesList.stream().filter(s1 -> s1.getId().equals(s.getItem())).findAny().get();
-                itemInfo.setName(shoe.getName());
-            } else if (s.getType().equals("CLOTHES")) {
-                ClothesDto clothes = clothesList.stream().filter(c -> c.getId().equals(s.getItem())).findAny().get();
-                itemInfo.setName(clothes.getName());
-            }
+            addIteminfo(shoesList, clothesList, s, itemInfo);
 
             itemInfo.setSpecimenId(s.getItemId());
             itemInfo.setSize(s.getSize());
             itemInfo.setColor(s.getColor());
 
-            PriceDto price = prices.stream().filter(p -> p.getItemId().equals(s.getItem())).findFirst().get();
-            itemInfo.setPrice(new com.pzeszko.microclothes.account.dto.PriceDto(price.getAmount(), price.getCurrency()));
+            addPriceInfo(prices, s, itemInfo);
 
             items.add(itemInfo);
         });
@@ -90,6 +84,24 @@ public class CartServiceImpl implements CartService{
 
         return cartDto;
 
+    }
+
+    private void addPriceInfo(List<PriceDto> prices, StockItemSpecimen s, ItemInfoDto itemInfo) {
+        Optional<PriceDto> priceOptional = prices.stream().filter(p -> p.getItemId().equals(s.getItem())).findFirst();
+        if(priceOptional.isPresent()) {
+            PriceDto price = priceOptional.get();
+            itemInfo.setPrice(new com.pzeszko.microclothes.account.dto.PriceDto(price.getAmount(), price.getCurrency()));
+        }
+    }
+
+    private void addIteminfo(List<ShoesDto> shoesList, List<ClothesDto> clothesList, StockItemSpecimen s, ItemInfoDto itemInfo) {
+        if(s.getType().equals("SHOES")) {
+            ShoesDto shoe = shoesList.stream().filter(s1 -> s1.getId().equals(s.getItem())).findAny().get();
+            itemInfo.setName(shoe.getName());
+        } else if (s.getType().equals("CLOTHES")) {
+            ClothesDto clothes = clothesList.stream().filter(c -> c.getId().equals(s.getItem())).findAny().get();
+            itemInfo.setName(clothes.getName());
+        }
     }
 
     @Transactional
