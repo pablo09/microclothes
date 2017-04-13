@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -122,6 +123,7 @@ public class CartServiceImpl implements CartService{
         items.add(itemId);
 
         cart.setStockItemIds(items);
+        cartRepository.save(cart);
     }
 
     @Transactional
@@ -133,7 +135,17 @@ public class CartServiceImpl implements CartService{
 
     private Cart findUserCart() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return cartRepository.findByUsername(username);
+        Cart cart = cartRepository.findByUsername(username);
+
+        if(cart == null) {
+            Cart cartEntity = new Cart();
+            List<Long> emptyItems = Collections.emptyList();
+            cartEntity.setUsername(username);
+            cartEntity.setStockItemIds(emptyItems);
+            return cartEntity;
+        }
+
+        return cart;
     }
 
     private List<String> getItemIdsByType(List<StockItemSpecimen> specimens, String type) {

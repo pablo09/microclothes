@@ -37,5 +37,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface UserClient {
 
     @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
-    ResponseEntity<UserModelDetails> getUserByName(@PathVariable("username") String username);
+    ResponseEntity<MicroclothesUserDetails> getUserByName(@PathVariable("username") String username);
 }

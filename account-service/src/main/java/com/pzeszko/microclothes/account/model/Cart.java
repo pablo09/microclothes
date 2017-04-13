@@ -11,10 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name = "CART")
-@Data
+ @Data
 public class Cart {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "USERNAME")
