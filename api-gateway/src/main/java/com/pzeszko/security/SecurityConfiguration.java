@@ -110,7 +110,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             // Disable CSFR protection on the following urls:
             private final AntPathRequestMatcher[] requestMatchers = {
-                                    new AntPathRequestMatcher("/**"), //TODO TEMPORARY DISABLED CSRF
                                     new AntPathRequestMatcher("/uaa/**"),
                                     new AntPathRequestMatcher("/user/register")
             };

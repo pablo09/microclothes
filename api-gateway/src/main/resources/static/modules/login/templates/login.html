@@ -1,0 +1,11 @@
+<div ng-controller="LoginCtrl as vm">
+    <form class="form-signin" style="width: 30%">
+        <h2 class="form-signin-heading">{{'login.title' | translate}}</h2>
+        <label for="inputEmail" class="sr-only">{{'login.username' | translate}}</label>
+        <input type="text" ng-model="vm.username" id="inputEmail" class="form-control" placeholder="{{'login.username' | translate}}" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">{{'login.password' | translate}}</label>
+        <input type="password" ng-model="vm.password" id="inputPassword" class="form-control" placeholder="{{'login.password' | translate}}" required="">
+
+        <button class="btn btn-lg btn-primary btn-block" ng-click="vm.login()">{{'common.login' | translate}}</button>
+    </form>
+</div>

@@ -1,0 +1,35 @@
+<div ng-controller="AccountCtrl as vm">
+    <a ui-sref="history">{{'order.history' | translate}}</a>
+    <h1>{{'account.cart.title' | translate}}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{'common.name' | translate}}</th>
+                <th>{{'common.size' | translate}}</th>
+                <th>{{'common.color' | translate}}</th>
+                <th>{{'common.price' | translate}}</th>
+                <th>{{'common.action' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.cart.items">
+                <td>{{$index + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.size}}</td>
+                <td>{{item.color}}</td>
+                <td>{{item.price.amount}} {{item.price.currency}}</td>
+                <td ng-click="vm.removeFromCart(item.specimenId)"><span style="color: red" class="glyphicon glyphicon-remove"></span></td>
+            </tr>
+            <tr>
+                <th colspan="5">{{'common.sum' | translate}}</th>
+                <th>{{vm.total}} PLN</th>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-col-md-offset-3">
+            <button ng-disabled="vm.cart.items.length === 0" ng-click="vm.finalizeOrder()" class="btn btn-success pull-right">{{'account.cart.buy' | translate}}</button>
+        </div>
+    </div>
+</div>
