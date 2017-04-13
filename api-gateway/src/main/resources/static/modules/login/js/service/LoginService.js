@@ -5,6 +5,7 @@
 
         function login(username, password) {
             getAccessToken(username, password).then(function(response) {
+                console.log(response);
                 $cookies.put('access_token', response.data.access_token);
                 $state.go("home", {}, {reload: true});
                 NotificationService.successfulOperation();
@@ -32,8 +33,10 @@
                 url: ApiService.getTokenAccessURL(),
                 headers: {
                     "Authorization": "Basic " + btoa("acme:acmesecret"),
-                    "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+                    "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
+                    "Access-Control-Allow-Credentials": "true"
                 },
+                withCredentials: true,
                 data: $httpParamSerializer(data)
             };
             return $http(request);

@@ -15,6 +15,9 @@
             'uiApp.menu',
             'uiApp.items',
             'uiApp.account'
-        ]);
+        ]).config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
+        $httpProvider.interceptors.push('XSRFInterceptor');
+    }]);
 
 })();
