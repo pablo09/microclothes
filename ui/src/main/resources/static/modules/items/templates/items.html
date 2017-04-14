@@ -4,7 +4,7 @@
         <div class="thumbnail col-md-4" ng-repeat="item in vm.getItemsInRow(row)">
             <h4 class="text-center"><span class="label label-info">{{item.brand}}</span></h4>
             <!-- TODO Dodac obsluge roznych typow obrazkow, np. png -->
-            <img ng-click="vm.goToDetails(item.id)" src="data:image/jpg;base64,{{item.image}}"></img>
+            <img onerror="this.src='https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw.jpg'" ng-click="vm.goToDetails(item.id)" src="data:image/jpg;base64,{{item.image}}"></img>
             <div class="caption">
                 <div class="row">
                     <div class="col-md-6 col-xs-6">
@@ -16,10 +16,7 @@
                         </h3>
                     </div>
                 </div>
-                <p></p>
 
-
-                <p> </p>
             </div>
         </div>
     </div>

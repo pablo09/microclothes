@@ -24,8 +24,8 @@ package com.pzeszko.service;/*
  *  https://opensource.org/licenses/MIT
  */
 
+import com.pzeszko.client.MicroclothesUserDetails;
 import com.pzeszko.client.UserClient;
-import com.pzeszko.client.UserModelDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +48,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
-        UserModelDetails userModelDetails = this.userClient.getUserByName(username).getBody();
+        MicroclothesUserDetails userDetails = this.userClient.getUserByName(username).getBody();
 
-        if (userModelDetails == null) {
+        if (userDetails == null) {
             throw new UsernameNotFoundException(username);
         }
 
-        return userModelDetails;
+        return userDetails;
     }
 }

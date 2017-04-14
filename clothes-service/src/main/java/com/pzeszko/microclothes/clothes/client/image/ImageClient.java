@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Admin on 07.04.2017.
  */
-@FeignClient("image-service")
+@FeignClient(name = "image-service", fallback = ImageClientFallback.class)
 public interface ImageClient {
 
     @RequestMapping(value = "/")
