@@ -21,7 +21,6 @@
         }
 
         function getAccessToken(username, password) {
-            console.log(ApiService.getTokenAccessURL());
             var data = {
                 grant_type:"password",
                 username: username,

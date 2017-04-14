@@ -1,17 +1,14 @@
 (function () {
     'use strict';
-    function MenuCtrl($log, $http, $state, $rootScope, RestService, LoginService) {
+    function MenuCtrl($rootScope, LoginService, UserService) {
         var vm = this;
 
         vm.loggedUser = null;
 
-        //TODO Wyniesc do serwisu
         vm.getInfo = function() {
-            RestService.makeMicroCall('http://localhost:8765/me').then(function(response) {
+            UserService.getUserInfo().then(function(response) {
                 vm.loggedUser = response.data.username;
-
                 $rootScope.loggedUser = vm.loggedUser;
-                console.log($rootScope.loggedUser);
             }, function(error) {
                 console.log(error);
             });
@@ -34,7 +31,7 @@
 
 
 
-    MenuCtrl.$inject = ['$log', '$http', '$state', '$rootScope', 'RestService', 'LoginService'];
+    MenuCtrl.$inject = ['$rootScope', 'LoginService', 'UserService'];
     angular
         .module('uiApp.menu')
         .controller('MenuCtrl', MenuCtrl);

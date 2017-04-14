@@ -1,32 +1,36 @@
 (function () {
     'use strict';
 
-    angular.module('uiApp.common').service('ApiService', function () {
+    angular.module('uiApp.common').service('ApiService', ['$location', function ($location) {
         var vm = this;
 
-        vm.getBaseApiURL = function () {
-            return 'http://localhost:8765';
+        vm.getBaseURL = function () {
+            return $location.protocol() + "://" + $location.host() + ":" + $location.port();
         };
 
         vm.getTokenAccessURL = function () {
-            return vm.getBaseApiURL() + '/uaa/oauth/token';
+            return vm.getBaseURL() + '/uaa/oauth/token';
         };
 
         vm.getShoesURL = function() {
-            return vm.getBaseApiURL() + '/api/shoes';
+            return vm.getBaseURL() + '/api/shoes';
         };
 
         vm.getClothesURL = function () {
-            return vm.getBaseApiURL() + '/api/clothes';
+            return vm.getBaseURL() + '/api/clothes';
         };
 
         vm.getAccountURL = function() {
-            return vm.getBaseApiURL() + '/api/account';
+            return vm.getBaseURL() + '/api/account';
         };
 
         vm.getOrderURL = function () {
-            return vm.getBaseApiURL() + '/api/order';
-        }
+            return vm.getBaseURL() + '/api/order';
+        };
+        
+        vm.getUserInfoURL = function() {
+            return vm.getBaseURL() + '/me';
+        };
 
-    });
+    }]);
 })();

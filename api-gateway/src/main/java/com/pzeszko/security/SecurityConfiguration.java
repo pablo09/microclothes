@@ -47,8 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
     private static final String CSRF_HEADER_NAME = "X-XSRF-TOKEN";
 
-	
-	 @Bean
+
+    @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         bean.setOrder(0);
         return bean;
     }
-	
+
     @Autowired
     private ResourceServerTokenServices tokenServices;
 
@@ -75,13 +75,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         //TODO Smelly configuration, reconsider /**
         http.authorizeRequests().antMatchers("/uaa/**", "/login", "/**", "/user/*").permitAll().anyRequest().authenticated()
-            .and()
-            .csrf().requireCsrfProtectionMatcher(csrfRequestMatcher()).csrfTokenRepository(csrfTokenRepository())
-            .and()
-            .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-            .addFilterAfter(oAuth2AuthenticationProcessingFilter(), AbstractPreAuthenticatedProcessingFilter.class)
-            .logout().permitAll()
-            .logoutSuccessUrl("/");
+                .and()
+                .csrf().requireCsrfProtectionMatcher(csrfRequestMatcher()).csrfTokenRepository(csrfTokenRepository())
+                .and()
+                .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+                .addFilterAfter(oAuth2AuthenticationProcessingFilter(), AbstractPreAuthenticatedProcessingFilter.class)
+                .logout().permitAll()
+                .logoutSuccessUrl("/");
     }
 
     private OAuth2AuthenticationProcessingFilter oAuth2AuthenticationProcessingFilter() {
@@ -110,8 +110,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             // Disable CSFR protection on the following urls:
             private final AntPathRequestMatcher[] requestMatchers = {
-                                    new AntPathRequestMatcher("/uaa/**"),
-                                    new AntPathRequestMatcher("/user/register")
+                    new AntPathRequestMatcher("/**"), //TODO TEMPORARY DISABLED CSRF
+                    new AntPathRequestMatcher("/uaa/**"),
+                    new AntPathRequestMatcher("/user/register")
             };
 
             @Override
