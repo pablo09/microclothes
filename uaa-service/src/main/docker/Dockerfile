@@ -1,5 +1,5 @@
 FROM java:8-jre-alpine
-MAINTAINER Thibaud Leprêtre
+MAINTAINER Paweł Żeszko
 
 ADD @project.build.finalName@.jar app.jar
 
