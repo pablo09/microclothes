@@ -1,0 +1,134 @@
+version: "2"
+services:
+  account-service:
+    image: pzeszko/account-service
+    environment:
+      REGISTRY_URL: http://service-registry:8761/eureka
+      SERVICE_PORT: 8801
+    links:
+      - service-registry:service-registry
+      - clothes-service:clothes-service
+      - shoes-service:shoes-service
+      - price-service:price-service
+      - stock-service:stock-service
+
+  service-registry:
+    image: pzeszko/service-registry
+    environment:
+      SERVICE_HOST: registry
+      SERVICE_PORT: 8761
+
+  uaa-service:
+    image: pzeszko/uaa-service
+    environment:
+      SERVICE_PORT: 8802
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - user-service:user-service
+
+  api-gateway:
+    image: pzeszko/api-gateway
+    environment:
+      SERVICE_PORT: 8765
+      REGISTRY_URL: http://service-registry:8761/eureka
+    ports:
+      - "8765:8765"
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+
+  clothes-service:
+    image: pzeszko/clothes-service
+    environment:
+      SERVICE_PORT: 8803
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - stock-service:stock-service
+      - image-service:image-service
+      - price-service:price-service
+      - account-service:account-service
+      - order-service:order-service
+      
+  shoes-service:
+    image: pzeszko/shoes-service
+    environment:
+      SERVICE_PORT: 8804
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - stock-service:stock-service
+      - image-service:image-service
+      - price-service:price-service
+      - account-service:account-service
+      - order-service:order-service   
+    
+  price-service:
+    image: pzeszko/price-service
+    environment:
+      SERVICE_PORT: 8805
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - stock-service:stock-service
+      - clothes-service:clothes-service
+      - shoes-service:shoes-service
+      - account-service:account-service
+      - order-service:order-service  
+
+  order-service:
+    image: pzeszko/order-service
+    environment:
+      SERVICE_PORT: 8805
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - stock-service:stock-service
+      - clothes-service:clothes-service
+      - shoes-service:shoes-service
+      - account-service:account-service
+      - price-service:price-service  
+
+  stock-service:
+    image: pzeszko/stock-service
+    environment:
+      SERVICE_PORT: 8806
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - order-service:stock-service
+      - clothes-service:clothes-service
+      - shoes-service:shoes-service
+      - account-service:account-service
+      - price-service:price-service  
+      
+   
+  image-service:
+    image: pzeszko/image-service
+    environment:
+      SERVICE_PORT: 8807
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - order-service:stock-service
+      - clothes-service:clothes-service
+      - shoes-service:shoes-service
+      - account-service:account-service
+      - price-service:price-service  
+  
+  user-service:
+    image: pzeszko/user-service
+    environment:
+      SERVICE_PORT: 8871
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+

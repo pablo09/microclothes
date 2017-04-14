@@ -12,7 +12,7 @@ spring:
 
 # Define the port where the Widget Foundry server would be running
 server:
-  port: 8421
+  port: 8807
 
 # Define the Eureka server that handles service registration
 eureka:
@@ -38,6 +38,14 @@ security:
 
 flyway:
   locations: classpath:db/migration, db/data
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
 ---
 
 spring:

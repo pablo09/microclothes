@@ -12,7 +12,7 @@ spring:
 
 # Define the port where the Widget Foundry server would be running
 server:
-  port: 8484
+  port: 8805
 
 # Define the Eureka server that handles service registration
 eureka:

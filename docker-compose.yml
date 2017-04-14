@@ -1,5 +1,6 @@
 version: "2"
 services:
+ 
   service-registry:
     image: pzeszko/service-registry
     environment:
@@ -9,10 +10,8 @@ services:
   uaa-service:
     image: pzeszko/uaa-service
     environment:
-      SERVICE_PORT: 8769
+      SERVICE_PORT: 8802
       REGISTRY_URL: http://service-registry:8761/eureka
-    links:
-      - service-registry:service-registry
 
   api-gateway:
     image: pzeszko/api-gateway
@@ -21,35 +20,38 @@ services:
       REGISTRY_URL: http://service-registry:8761/eureka
     ports:
       - "8765:8765"
-    links:
-      - service-registry:service-registry
-      - uaa-service:uaa-service
-
-  dummy-service:
-    image: pzeszko/dummy-service
+    
+  clothes-service:
+    image: pzeszko/clothes-service
     environment:
-      SERVICE_PORT: 8870
+      SERVICE_PORT: 8803
       REGISTRY_URL: http://service-registry:8761/eureka
     links:
       - service-registry:service-registry
       - uaa-service:uaa-service
-
+   
+  image-service:
+    image: pzeszko/image-service
+    environment:
+      SERVICE_PORT: 8807
+      REGISTRY_URL: http://service-registry:8761/eureka
+    links:
+      - service-registry:service-registry
+      - uaa-service:uaa-service
+      - clothes-service:clothes-service
+   
   user-service:
     image: pzeszko/user-service
     environment:
       SERVICE_PORT: 8871
       REGISTRY_URL: http://service-registry:8761/eureka
-    links:
-      - service-registry:service-registry
-      - uaa-service:uaa-service
-
-  client:
-    image: pzeszko/client
+      
+  price-service:
+    image: pzeszko/price-service
     environment:
+      SERVICE_PORT: 8805
       REGISTRY_URL: http://service-registry:8761/eureka
     links:
       - service-registry:service-registry
-      - api-gateway:api-gateway
-    ports:
-      - "8080:8080"
-
+      - uaa-service:uaa-service
+      - clothes-service:clothes-service
