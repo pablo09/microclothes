@@ -89,7 +89,7 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
     public Long getItemsNumber(String itemId) {
         Session session = entityManager.unwrap(Session.class);
         Query query = session.createQuery("Select FROM StockItemSpecimen item WHERE item.id = " + itemId);
-
+        Integer stest  = null;
         List<Long> result = query.list();
         if(result != null && !result.isEmpty()) {
             return result.get(0);
