@@ -23,4 +23,6 @@ public interface StockItemSpecimenService {
     List<StockItemDto> getItemIdsForStockItems(StockItemInfoRequestDto request);
 
     boolean buyItems(StockItemInfoRequestDto request);
+
+    Long getItemsNumber(String itemId);
 }

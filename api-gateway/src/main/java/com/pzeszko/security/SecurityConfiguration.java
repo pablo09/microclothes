@@ -140,7 +140,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 if (csrf != null) {
                     Cookie cookie = new Cookie(CSRF_COOKIE_NAME, csrf.getToken());
                     cookie.setPath("/");
-                    cookie.setSecure(true);
                     response.addCookie(cookie);
                 }
                 filterChain.doFilter(request, response);

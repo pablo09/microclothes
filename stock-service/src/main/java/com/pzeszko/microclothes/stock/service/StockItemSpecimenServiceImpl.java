@@ -8,10 +8,13 @@ import com.pzeszko.microclothes.stock.exception.MicroclothesException;
 import com.pzeszko.microclothes.stock.mapper.StockItemSpecimenMapper;
 import com.pzeszko.microclothes.stock.model.StockItemSpecimen;
 import com.pzeszko.microclothes.stock.repository.StockItemSpecimenRepository;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -29,6 +32,9 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
 
     @Autowired
     private StockItemSpecimenMapper stockItemSpecimenMapper;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Override
     public List<StockItemSpecimen> findAllStockItemSpecimens() {
@@ -77,6 +83,19 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
         }
 
         return true;
+    }
+
+    @Override
+    public Long getItemsNumber(String itemId) {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createQuery("Select FROM StockItemSpecimen item WHERE item.id = " + itemId);
+
+        List<Long> result = query.list();
+        if(result != null && !result.isEmpty()) {
+            return result.get(0);
+        }
+
+        return 0L;
     }
 
 }

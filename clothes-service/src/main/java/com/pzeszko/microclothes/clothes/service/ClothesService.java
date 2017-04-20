@@ -17,4 +17,5 @@ public interface ClothesService {
     ClothesDetailsDto findClothesDetails(String itemdId);
 
     List<ClothesDto> getClothesInfo(ClothesInfoRequestDto clothesInfoRequestDto);
+
 }

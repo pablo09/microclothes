@@ -5,7 +5,7 @@
 
         function login(username, password) {
             getAccessToken(username, password).then(function(response) {
-                $cookies.put('access_token', response.data.access_token);
+                localStorage.setItem("access_token", response.data.access_token);
                 $state.go("home", {}, {reload: true});
                 NotificationService.successfulOperation();
             }, function() {

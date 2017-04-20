@@ -40,4 +40,9 @@ public class StockController {
         return ResponseEntity.ok().build();
     }
 
+    @RequestMapping(value = "/number/{itemId}")
+    public ResponseEntity<Long> number(@PathVariable("itemId") String itemId) {
+        return ResponseEntity.ok(stockItemSpecimenService.getItemsNumber(itemId));
+    }
+
 }
