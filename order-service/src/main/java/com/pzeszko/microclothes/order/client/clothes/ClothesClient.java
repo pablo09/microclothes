@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Admin on 11.04.2017.
  */
-@FeignClient("clothes-service")
+@FeignClient(name = "clothes-service", fallback = ClothesClientFallback.class)
 public interface ClothesClient {
 
     @RequestMapping("/clothesInfo")

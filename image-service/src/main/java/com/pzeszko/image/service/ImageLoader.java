@@ -7,8 +7,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -34,10 +35,10 @@ public class ImageLoader {
             String base64Data = null;
 
             try {
-                byte[] data = Files.readAllBytes(image.getFile().toPath());
+                byte[] data = getBytesFromInputStream(image.getInputStream());
                 base64Data = Base64.getEncoder().encodeToString(data);
             } catch (IOException e) {
-                e.printStackTrace();;
+                e.printStackTrace();
             }
 
             return new ImageDto(getFilenameWIthNoExt(image.getFilename()), base64Data);
@@ -52,5 +53,22 @@ public class ImageLoader {
 
     private Resource[] loadResources(String pattern) throws IOException {
         return ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources(pattern);
+    }
+
+    private byte[] getBytesFromInputStream(InputStream is) {
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream();) {
+            byte[] buffer = new byte[0xFFFF];
+
+            for (int len; (len = is.read(buffer)) != -1; )
+                os.write(buffer, 0, len);
+
+            os.flush();
+
+            return os.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
