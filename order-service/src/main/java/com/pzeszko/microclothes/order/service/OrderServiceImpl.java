@@ -17,6 +17,7 @@ import com.pzeszko.microclothes.order.dto.OrderDetailsDto;
 import com.pzeszko.microclothes.order.dto.OrderDto;
 import com.pzeszko.microclothes.order.mapper.OrderMapper;
 import com.pzeszko.microclothes.order.model.Item;
+import com.pzeszko.microclothes.order.model.ItemType;
 import com.pzeszko.microclothes.order.model.Order;
 import com.pzeszko.microclothes.order.model.Price;
 import com.pzeszko.microclothes.order.repository.OrderRepository;
@@ -78,10 +79,10 @@ public class OrderServiceImpl implements OrderService {
         specimens.stream().forEach(s -> {
             Item item = new Item();
 
-            if (s.getType().equals("SHOES")) {
+            if (s.getType().equals(ItemType.SHOES.name())) {
                 ShoesDto shoe = shoesList.stream().filter(s1 -> s1.getId().equals(s.getItem())).findAny().get();
                 item.setName(shoe.getName());
-            } else if (s.getType().equals("CLOTHES")) {
+            } else if (s.getType().equals(ItemType.CLOTHES.name())) {
                 ClothesDto clothes = clothesList.stream().filter(c -> c.getId().equals(s.getItem())).findAny().get();
                 item.setName(clothes.getName());
             }

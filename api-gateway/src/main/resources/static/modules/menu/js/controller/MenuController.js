@@ -9,8 +9,6 @@
             UserService.getUserInfo().then(function(response) {
                 vm.loggedUser = response.data.username;
                 $rootScope.loggedUser = vm.loggedUser;
-            }, function(error) {
-                console.log(error);
             });
         };
 

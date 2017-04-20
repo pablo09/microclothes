@@ -34,7 +34,7 @@
                 }
 
                 vm.totalItemsRange = range;
-            };
+            }
 
             vm.getItemsInRow = function(row) {
                 var items = [];

@@ -15,6 +15,7 @@ import com.pzeszko.microclothes.account.client.stock.StockItemSpecimen;
 import com.pzeszko.microclothes.account.dto.CartDto;
 import com.pzeszko.microclothes.account.dto.ItemInfoDto;
 import com.pzeszko.microclothes.account.model.Cart;
+import com.pzeszko.microclothes.account.model.ItemType;
 import com.pzeszko.microclothes.account.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -96,16 +97,12 @@ public class CartServiceImpl implements CartService{
     }
 
     private void addIteminfo(List<ShoesDto> shoesList, List<ClothesDto> clothesList, StockItemSpecimen s, ItemInfoDto itemInfo) {
-        if(s.getType().equals("SHOES")) {
+        if(s.getType().equals(ItemType.SHOES.name())) {
             Optional<ShoesDto> shoeOptional = shoesList.stream().filter(s1 -> s1.getId().equals(s.getItem())).findAny();
-            shoeOptional.ifPresent(shoe -> {
-                itemInfo.setName(shoe.getName());
-            });
-        } else if (s.getType().equals("CLOTHES")) {
+            shoeOptional.ifPresent(shoe -> itemInfo.setName(shoe.getName()));
+        } else if (s.getType().equals(ItemType.CLOTHES.name())) {
             Optional<ClothesDto> clothesOptional = clothesList.stream().filter(c -> c.getId().equals(s.getItem())).findAny();
-            clothesOptional.ifPresent(clothes -> {
-                itemInfo.setName(clothes.getName());
-            });
+            clothesOptional.ifPresent(clothes -> itemInfo.setName(clothes.getName()));
         }
     }
 

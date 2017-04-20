@@ -34,7 +34,7 @@ public class ImageLoader {
     public List<ImageDto> loadImages() throws IOException {
         Resource[] images = loadResources("classpath:/images/*");
 
-        List<ImageDto> imageList = Arrays.stream(images).map(image -> {
+        return Arrays.stream(images).map(image -> {
             String base64Data = null;
 
             try {
@@ -46,8 +46,6 @@ public class ImageLoader {
 
             return new ImageDto(getFilenameWIthNoExt(image.getFilename()), base64Data);
         }).collect(Collectors.toList());
-
-        return imageList;
     }
 
     private String getFilenameWIthNoExt(String file) {

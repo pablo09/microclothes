@@ -24,7 +24,6 @@
             vm.chooseColor = function(color) {
                 vm.selectedColor = color;
                 vm.availableSizes = getAvailableSizes(vm.itemDetails);
-                console.log(vm.availableSizes);
                 vm.selectedSize = vm.availableSizes[0];
             };
 

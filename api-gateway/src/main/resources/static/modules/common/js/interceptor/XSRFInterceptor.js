@@ -6,7 +6,6 @@ angular.module('uiApp.common')
             request: function(config) {
 
                 var token = $cookies.get('XSRF-TOKEN');
-                console.log(token);
                 if (token) {
                     config.headers['X-XSRF-TOKEN'] = token;
                 }
