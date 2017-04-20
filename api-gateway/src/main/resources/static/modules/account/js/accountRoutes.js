@@ -4,7 +4,7 @@
     angular.module('uiApp.account').config([
         '$stateProvider',
         '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+        function ($stateProvider) {
 
             $stateProvider
                 .state('account', {

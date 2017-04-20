@@ -9,7 +9,7 @@
             ItemService.getShoesDetails($stateParams.itemId).then(function(response) {
                 vm.shoesDetails = response.data;
                 vm.shoesLoaded = true;
-            }, function(error) {
+            }, function() {
                 NotificationService.failedOperation();
             });
 

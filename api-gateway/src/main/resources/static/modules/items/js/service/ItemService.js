@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function ItemService($http, ApiService, RestService, NotificationService, AccountService) {
+    function ItemService($http, ApiService, RestService) {
 
         function getClothes() {
           return RestService.makeMicroCall(ApiService.getClothesURL());
@@ -27,6 +27,6 @@
         };
     }
 
-    ItemService.$inject = ['$http', 'ApiService', 'RestService', 'NotificationService'];
+    ItemService.$inject = ['$http', 'ApiService'];
     angular.module('uiApp.items').service('ItemService', ItemService);
 })();

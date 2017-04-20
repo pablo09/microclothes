@@ -1,6 +1,8 @@
 package com.pzeszko.image.service;
 
 import com.pzeszko.image.dto.ImageDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class ImageLoader {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ImageLoader.class);
     private ResourceLoader resourceLoader;
 
     @Autowired
@@ -38,7 +41,7 @@ public class ImageLoader {
                 byte[] data = getBytesFromInputStream(image.getInputStream());
                 base64Data = Base64.getEncoder().encodeToString(data);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("Error occured", e);
             }
 
             return new ImageDto(getFilenameWIthNoExt(image.getFilename()), base64Data);
@@ -66,9 +69,9 @@ public class ImageLoader {
 
             return os.toByteArray();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Error occured", e);
         }
 
-        return null;
+        return new byte[0];
     }
 }

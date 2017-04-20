@@ -7,20 +7,19 @@
         vm.total = 0;
 
         vm.removeFromCart = function(itemId) {
-            AccountService.removeFromCart(itemId).then(function(response) {
+            AccountService.removeFromCart(itemId).then(function() {
                 removeFromCart(itemId);
                 NotificationService.successfulOperation();
-            }, function(error) {
+            }, function() {
                 NotificationService.operationFailed();
             });
-            ;
         };
 
         vm.finalizeOrder = function() {
-            OrderService.finalizeOrder(vm.cart.items).then(function(response) {
+            OrderService.finalizeOrder(vm.cart.items).then(function() {
                 $state.reload();
                 NotificationService.successfulOperation();
-            }, function(error) {
+            }, function() {
                 NotificationService.failedOperation();
             })
         };
@@ -33,7 +32,7 @@
         function countTotal() {
             var sum = 0;
 
-            angular.forEach(vm.cart.items, function(key, value) {
+            angular.forEach(vm.cart.items, function(key) {
                     sum += key.price.amount;
             });
 
@@ -44,8 +43,9 @@
             AccountService.getCart().then(function(response) {
                 vm.cart = response.data;
                 vm.total = countTotal();
-
-            }, function(error) {});
+            }, function() {
+                NotificationService.failedOperation();
+            });
 
 
         })();

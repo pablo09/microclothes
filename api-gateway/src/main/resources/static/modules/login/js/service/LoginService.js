@@ -9,7 +9,7 @@
                 $cookies.put('access_token', response.data.access_token);
                 $state.go("home", {}, {reload: true});
                 NotificationService.successfulOperation();
-            }, function(error) {
+            }, function() {
                 NotificationService.failedOperation();
             });
         }

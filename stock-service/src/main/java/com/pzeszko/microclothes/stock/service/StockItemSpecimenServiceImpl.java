@@ -65,7 +65,7 @@ public class StockItemSpecimenServiceImpl implements  StockItemSpecimenService {
         for(StockItemSpecimen actualItem: actualItems) {
             Integer oldAmount = actualItem.getAmount();
             Integer requestedAmount = numberOfItems.get(actualItem.getId()).intValue();
-            Integer newAmount = requestedAmount;
+            Integer newAmount;
 
             if(oldAmount < numberOfItems.get(actualItem.getId())) {
                 throw new MicroclothesException(ErrorCode.ITEMS_NOT_AVAILABLE);

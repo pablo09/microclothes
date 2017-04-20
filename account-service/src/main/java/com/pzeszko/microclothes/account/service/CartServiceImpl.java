@@ -97,11 +97,15 @@ public class CartServiceImpl implements CartService{
 
     private void addIteminfo(List<ShoesDto> shoesList, List<ClothesDto> clothesList, StockItemSpecimen s, ItemInfoDto itemInfo) {
         if(s.getType().equals("SHOES")) {
-            ShoesDto shoe = shoesList.stream().filter(s1 -> s1.getId().equals(s.getItem())).findAny().get();
-            itemInfo.setName(shoe.getName());
+            Optional<ShoesDto> shoeOptional = shoesList.stream().filter(s1 -> s1.getId().equals(s.getItem())).findAny();
+            shoeOptional.ifPresent(shoe -> {
+                itemInfo.setName(shoe.getName());
+            });
         } else if (s.getType().equals("CLOTHES")) {
-            ClothesDto clothes = clothesList.stream().filter(c -> c.getId().equals(s.getItem())).findAny().get();
-            itemInfo.setName(clothes.getName());
+            Optional<ClothesDto> clothesOptional = clothesList.stream().filter(c -> c.getId().equals(s.getItem())).findAny();
+            clothesOptional.ifPresent(clothes -> {
+                itemInfo.setName(clothes.getName());
+            });
         }
     }
 

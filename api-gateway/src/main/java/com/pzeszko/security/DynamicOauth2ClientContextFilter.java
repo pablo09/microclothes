@@ -41,7 +41,7 @@ class DynamicOauth2ClientContextFilter extends OAuth2ClientContextFilter {
     }
 
     private String getBaseUrl(HttpServletRequest request) {
-        StringBuffer url = request.getRequestURL();
+        StringBuilder url = new StringBuilder(request.getRequestURL());
         return  url.substring(0, url.length() - request.getRequestURI().length() + request.getContextPath().length());
     }
 }

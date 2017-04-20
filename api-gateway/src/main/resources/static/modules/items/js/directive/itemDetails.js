@@ -50,9 +50,9 @@
             }
 
             vm.addToCart = function() {
-                AccountService.addToCart(vm.selectedSize.id).then(function(response) {
+                AccountService.addToCart(vm.selectedSize.id).then(function() {
                     NotificationService.successfulOperation();
-                }, function(error) {
+                }, function() {
                     NotificationService.failedOperation();
                 });
             };
@@ -67,7 +67,6 @@
                 vm.availableColors = getAvailableColors(vm.itemDetails);
                 vm.selectedColor = vm.availableColors[0];
                 vm.availableSizes = getAvailableSizes(vm.itemDetails);
-                console.log(vm.availableSizes);
                 vm.selectedSize = vm.availableSizes[0];
             })();
         }

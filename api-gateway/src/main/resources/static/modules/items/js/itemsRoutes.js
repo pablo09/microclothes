@@ -4,9 +4,8 @@
     angular.module('uiApp.items').config([
         '$stateProvider',
         '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+        function ($stateProvider) {
 
-            //  $urlRouterProvider.otherwise('/login');
 
             $stateProvider
                 .state('clothes', {

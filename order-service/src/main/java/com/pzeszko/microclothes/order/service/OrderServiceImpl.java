@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -97,10 +98,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private Price getPrice(List<PriceDto> prices, StockItemSpecimen s) {
-        PriceDto price = prices.stream().filter(p -> p.getItemId().equals(s.getItem())).findFirst().get();
         Price priceEntity = new Price();
-        priceEntity.setAmount(price.getAmount());
-        priceEntity.setCurrency(price.getCurrency());
+        Optional<PriceDto> priceOptional = prices.stream().filter(p -> p.getItemId().equals(s.getItem())).findFirst();
+
+        Optional.ofNullable(priceOptional).ifPresent(optional -> {
+            PriceDto price = optional.get();
+            priceEntity.setAmount(price.getAmount());
+            priceEntity.setCurrency(price.getCurrency());
+        });
+
         return priceEntity;
     }
 

@@ -8,7 +8,7 @@
 
 
         function successfulOperation(msg) {
-            if(msg != null && msg != undefined) {
+            if(msg !== null && msg !== undefined) {
                 toastr.success(getMessage(msg));
             } else {
                 toastr.success(getMessage(SUCCESS_MSG));
@@ -23,11 +23,11 @@
             toastr.warning(getMessage(msg));
         }
 
-        function error(errorCode) {
-            toastr.error(getErrorMessage(errorCode));
+        function error() {
+            toastr.error(getErrorMessage());
         }
 
-        function getErrorMessage(errorCode) {
+        function getErrorMessage() {
             return getMessage(ERROR_MSG);
         }
 

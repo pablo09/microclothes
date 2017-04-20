@@ -77,8 +77,7 @@
                 size: 'Rozmiar',
                 sum: 'Suma',
                 action: 'Akcja',
-                preview: 'Podgląd',
-                back: 'Wróc'
+                preview: 'Podgląd'
             }
         });
 

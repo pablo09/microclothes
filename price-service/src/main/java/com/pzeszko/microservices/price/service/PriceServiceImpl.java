@@ -31,9 +31,6 @@ public class PriceServiceImpl implements PriceService{
 
     @Override
     public List<Price> getPrices(PricesRequestDto dto) {
-        List<Price> l1 = priceRepository.findByItemId(dto.getIds());
-        List<Price> l2 = priceRepository.findByItemIdIn(dto.getIds());
-
-        return l2;
+        return priceRepository.findByItemIdIn(dto.getIds());
     }
 }

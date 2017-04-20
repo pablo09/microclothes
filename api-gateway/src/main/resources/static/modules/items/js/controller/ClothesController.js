@@ -9,7 +9,7 @@
             ItemService.getClothes().then(function(response) {
                 vm.clothes = response.data;
                 vm.clothesLoaded = true;
-            }, function(error) {
+            }, function() {
                 NotificationService.failedOperation();
             });
 

@@ -19,7 +19,7 @@
         (function init() {
              OrderService.orderHistory().then(function(response) {
                  vm.history = response.data;
-             }, function(error) {
+             }, function() {
                  NotificationService.failedOperation();
              })
         })();

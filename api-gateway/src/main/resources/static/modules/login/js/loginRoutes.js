@@ -4,9 +4,7 @@
     angular.module('uiApp.login').config([
         '$stateProvider',
         '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
-
-          //  $urlRouterProvider.otherwise('/login');
+        function ($stateProvider) {
 
             $stateProvider
                 .state('login', {

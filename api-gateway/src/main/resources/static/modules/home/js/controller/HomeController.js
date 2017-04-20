@@ -1,10 +1,8 @@
 (function () {
     'use strict';
-    function HomeCtrl($log, $http, $state, RestService) {
-        var vm = this;
+    function HomeCtrl() {
+        //TODO
     }
-
-
 
     HomeCtrl.$inject = ['$log', '$http', '$state', 'RestService'];
     angular
