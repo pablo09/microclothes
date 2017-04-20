@@ -43,6 +43,7 @@
             AccountService.getCart().then(function(response) {
                 vm.cart = response.data;
                 vm.total = countTotal();
+                console.log(vm.total);
             }, function() {
                 NotificationService.failedOperation();
             });
