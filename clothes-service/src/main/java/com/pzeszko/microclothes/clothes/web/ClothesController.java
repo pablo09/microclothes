@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ClothesController {
     public ClothesDetailsDto getClothes(@PathVariable("clothesId") String clothesId) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA1");  // Noncompliant
-            md.getAlgorithm();
+            //md.getAlgorithm();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -42,7 +44,9 @@ public class ClothesController {
     }
 
     @RequestMapping("/clothesInfo")
-    public List<ClothesDto> getClothesInfo(@RequestBody ClothesInfoRequestDto clothesInfoRequestDto) {
+    public List<ClothesDto> getClothesInfo(@RequestBody ClothesInfoRequestDto clothesInfoRequestDto, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("info", request.getParameter("USERNAME"));
         return clothesService.getClothesInfo(clothesInfoRequestDto);
     }
 }
