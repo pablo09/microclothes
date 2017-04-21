@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -28,6 +30,14 @@ public class ClothesController {
 
     @RequestMapping("/{clothesId}")
     public ClothesDetailsDto getClothes(@PathVariable("clothesId") String clothesId) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA1");  // Noncompliant
+            md.getAlgorithm();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+
         return clothesService.findClothesDetails(clothesId);
     }
 
