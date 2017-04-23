@@ -1,5 +1,6 @@
 package com.pzeszko.microclothes.clothes.client.price;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -10,9 +11,11 @@ import java.util.List;
  * Created by Admin on 12.04.2017.
  */
 @Component
+@Log4j
 public class PriceClientFallback implements PriceClient {
     @Override
     public List<PriceDto> getAllPrices() {
+        log.warn("Using fallback method for PriceClient#$getAllPrices");
         return Collections.emptyList();
     }
 

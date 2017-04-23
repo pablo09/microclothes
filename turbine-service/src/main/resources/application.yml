@@ -16,7 +16,7 @@ management:
 
 turbine:
   clusterNameExpression: "'default'"
-  appConfig: SHOES-SERVICE,CLOTHES-SERVICE,API-GATEWAY
+  appConfig: SHOES-SERVICE,CLOTHES-SERVICE,ORDER-SERVICE,ACCOUNT-SERVICE,API-GATEWAY
   combineHostPort: true
 
 # Define the Eureka server that handles service registration

@@ -42,7 +42,9 @@ public class ImageLoader {
 
             return new ImageDto(getFilenameWIthNoExt(image.getFilename()), base64Data);
         }).collect(Collectors.toList());
-
+        if(true) {
+            throw new RuntimeException("Unexpected error occured");
+        }
         return imageList;
     }
 

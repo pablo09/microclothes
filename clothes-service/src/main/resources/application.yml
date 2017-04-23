@@ -39,6 +39,13 @@ security:
 
 flyway:
   locations: classpath:db/migration, db/data
+
+
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 7
 ---
 
 spring:

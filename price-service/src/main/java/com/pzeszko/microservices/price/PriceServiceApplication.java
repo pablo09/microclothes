@@ -6,14 +6,12 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
  * Created by Admin on 07.04.2017.
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableFeignClients
 @EnableCircuitBreaker

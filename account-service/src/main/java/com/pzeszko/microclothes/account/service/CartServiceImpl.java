@@ -17,7 +17,6 @@ import com.pzeszko.microclothes.account.dto.ItemInfoDto;
 import com.pzeszko.microclothes.account.model.Cart;
 import com.pzeszko.microclothes.account.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -134,7 +133,8 @@ public class CartServiceImpl implements CartService{
     }
 
     private Cart findUserCart() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+      //  String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = "pawel";
         Cart cart = cartRepository.findByUsername(username);
 
         if(cart == null) {

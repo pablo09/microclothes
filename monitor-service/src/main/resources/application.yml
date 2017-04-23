@@ -20,6 +20,11 @@ eureka:
   server:
     waitTimeInMsWhenSyncEmpty: 0
 
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 8
 ---
 spring:
   profiles: docker

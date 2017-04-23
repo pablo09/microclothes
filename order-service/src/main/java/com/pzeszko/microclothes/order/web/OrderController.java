@@ -30,7 +30,7 @@ public class OrderController {
 
     @RequestMapping("/")
     public List<OrderDetailsDto> getOrdersForUser(Principal principal) {
-        return orderService.getOrders(principal.getName());
+        return orderService.getOrders("pawel");
     }
 
     @RequestMapping("/all")
