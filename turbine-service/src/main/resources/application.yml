@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: turbine-service
+
+server:
+  port: 8989
+
+management:
+  port: 8990
+
+
+#turbine:
+#  clusterNameExpression: "'default'"
+#  appConfig: CLOTHES-SERVICE,API-GATEWAY
+#  combineHostPort: true
+
+turbine:
+  clusterNameExpression: "'default'"
+  appConfig: SHOES-SERVICE,CLOTHES-SERVICE,ORDER-SERVICE,ACCOUNT-SERVICE,API-GATEWAY
+  combineHostPort: true
+
+# Define the Eureka server that handles service registration
+eureka:
+  instance:
+      hostname: localhost
+      port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/

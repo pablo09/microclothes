@@ -22,7 +22,6 @@ import com.pzeszko.microclothes.order.model.Price;
 import com.pzeszko.microclothes.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -118,7 +117,7 @@ public class OrderServiceImpl implements OrderService {
         accountClient.emptyCart();
     }
     private String getUsername() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+        return "pawel";
     }
 
     private List<String> getItemIdsByType(List<StockItemSpecimen> specimens, String type) {

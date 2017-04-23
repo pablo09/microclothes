@@ -12,6 +12,7 @@ import com.pzeszko.microclothes.clothes.dto.ClothesInfoRequestDto;
 import com.pzeszko.microclothes.clothes.mapper.ClothesMapper;
 import com.pzeszko.microclothes.clothes.model.Clothes;
 import com.pzeszko.microclothes.clothes.repository.ClothesRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
  * Created by Admin on 08.04.2017.
  */
 @Service
+@Log4j
 @Transactional(readOnly = true)
 public class ClothesServiceImpl implements ClothesService {
 

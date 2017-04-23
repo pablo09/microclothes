@@ -37,16 +37,20 @@ security:
       id: openid
       serviceId: ${PREFIX:}resource
 
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 15000
 
 flyway:
   locations: classpath:db/migration, db/data
+
+
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 7
+      execution:
+              isolation:
+                thread:
+                  timeoutInMilliseconds: 15000
 ---
 
 spring:

@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: monitor-service
+
+# Define the port where the Service Registry server would be running
+server:
+  port: 7979
+
+# Defines the Eureka server that is used by the Netflix OSS components to use as the registry
+# for server discovery
+eureka:
+  instance:
+    hostname: localhost
+    port: ${server.port}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 8
+---
+spring:
+  profiles: docker
+server:
+  port: ${SERVICE_PORT}
+eureka:
+  instance:
+    hostname: ${SERVICE_HOST}
+    port: ${server.port}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    enable-self-preservation: false

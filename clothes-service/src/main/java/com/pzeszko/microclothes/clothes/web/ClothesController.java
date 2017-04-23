@@ -26,10 +26,12 @@ public class ClothesController {
         return clothesService.findAll();
     }
 
+
     @RequestMapping("/{clothesId}")
     public ClothesDetailsDto getClothes(@PathVariable("clothesId") String clothesId) {
         return clothesService.findClothesDetails(clothesId);
     }
+
 
     @RequestMapping("/clothesInfo")
     public List<ClothesDto> getClothesInfo(@RequestBody ClothesInfoRequestDto clothesInfoRequestDto) {

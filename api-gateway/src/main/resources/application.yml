@@ -28,10 +28,7 @@ zuul:
           sensitiveHeaders:
           path: /image/**
           stripPrefix: false
-    price-service:
-        sensitiveHeaders:
-        path: /price/**
-        stripPrefix: false
+    price-service: /price/**
     stock-service:
         sensitiveHeaders:
         path: /availibility/**

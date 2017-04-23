@@ -22,7 +22,7 @@ public class CartController {
 
     @RequestMapping("/")
     public CartDto findCartForUser(Principal principal) {
-        return cartService.getCartForUser(principal.getName());
+        return cartService.getCartForUser("pawel");
     }
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.PUT)
