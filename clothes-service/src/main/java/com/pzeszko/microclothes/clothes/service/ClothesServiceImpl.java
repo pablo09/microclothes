@@ -6,6 +6,8 @@ import com.pzeszko.microclothes.clothes.client.price.PriceClient;
 import com.pzeszko.microclothes.clothes.client.price.PriceDto;
 import com.pzeszko.microclothes.clothes.client.stock.StockClient;
 import com.pzeszko.microclothes.clothes.client.stock.StockItemSpecimen;
+import com.pzeszko.microclothes.clothes.config.UserHystrixRequestContext;
+import com.pzeszko.microclothes.clothes.config.authentication.JwtAuthentication;
 import com.pzeszko.microclothes.clothes.dto.ClothesDetailsDto;
 import com.pzeszko.microclothes.clothes.dto.ClothesDto;
 import com.pzeszko.microclothes.clothes.dto.ClothesInfoRequestDto;
@@ -13,6 +15,7 @@ import com.pzeszko.microclothes.clothes.mapper.ClothesMapper;
 import com.pzeszko.microclothes.clothes.model.Clothes;
 import com.pzeszko.microclothes.clothes.repository.ClothesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +47,9 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public List<ClothesDto> findAll() {
+        Authentication auth = UserHystrixRequestContext.getInstance().get();
+        JwtAuthentication jwtAuthentication = (JwtAuthentication) auth;
+
         List<Clothes> clothes = clothesRepository.findAll();
         List<ImageDto> images = imageClient.getImages();
         List<PriceDto> priceDtos = priceClient.getAllPrices();

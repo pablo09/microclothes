@@ -9,7 +9,7 @@
         };
 
         vm.getTokenAccessURL = function () {
-            return vm.getBaseApiURL() + '/uaa/oauth/token';
+            return vm.getBaseApiURL() + '/oauth/token';
         };
 
         vm.getShoesURL = function() {
