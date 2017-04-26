@@ -7,13 +7,8 @@ services:
       JAVA_OPTS: -Xms450m -Xmx450m
       SERVICE_HOST: registry
       SERVICE_PORT: 8761
-
-  uaa-service:
-    image: pzeszko/uaa-service
-    environment:
-      SERVICE_PORT: 8802
-      REGISTRY_URL: http://service-registry:8761/eureka
-      JAVA_OPTS: -Xms350m -Xmx350m
+    ports:
+      - "8761:8761"
 
   api-gateway:
     image: pzeszko/api-gateway
@@ -39,38 +34,31 @@ services:
       REGISTRY_URL: http://service-registry:8761/eureka
       JAVA_OPTS: -Xms300m -Xmx300m
       
-  price-service:
-    image: pzeszko/price-service
+ 
+  turbine-service:
+    image: pzeszko/turbine-service
     environment:
-      SERVICE_PORT: 8805
+      SERVICE_PORT: 8989
       REGISTRY_URL: http://service-registry:8761/eureka
       JAVA_OPTS: -Xms500m -Xmx500m
+    ports:
+      - "8989:8989"
       
-  account-service:
-    image: pzeszko/account-service
+  monitor-service:
+    image: pzeszko/monitor-service
     environment:
-      REGISTRY_URL: http://service-registry:8761/eureka
-      SERVICE_PORT: 8801
-      JAVA_OPTS: -Xms500m -Xmx500m
-
-  stock-service:
-    image: pzeszko/stock-service
-    environment:
-      SERVICE_PORT: 8806
+      SERVICE_PORT: 7979
       REGISTRY_URL: http://service-registry:8761/eureka
       JAVA_OPTS: -Xms500m -Xmx500m
+    ports:
+      - "7979:7979"
       
   image-service:
     image: pzeszko/image-service
     environment:
-      SERVICE_PORT: 8807
+      SERVICE_PORT: 8421
       REGISTRY_URL: http://service-registry:8761/eureka
-      JAVA_OPTS: -Xms500m -Xmx500m
-  
-  order-service:
-    image: pzeszko/order-service
-    environment:
-      SERVICE_PORT: 8805
-      REGISTRY_URL: http://service-registry:8761/eureka
+      JAVA_OPTS: -Xms300m -Xmx300m
+      
   
       

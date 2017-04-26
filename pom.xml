@@ -16,18 +16,20 @@
     </parent>
 
     <modules>
-        <module>ui</module>
+        <!-- <module>ui</module> -->
         <module>api-gateway</module>
         <module>service-registry</module>
         <module>user-service</module>
-        <module>account-service</module>
+        <!-- <module>account-service</module> -->
         <module>clothes-service</module>
-        <module>image-service</module>
+        <!-- <module>image-service</module> -->
        <!-- <module>order-service</module> -->
-        <module>price-service</module>
+       <!-- <module>price-service</module> -->
        <!-- <module>shoes-service</module> -->
-        <module>stock-service</module>
+       <!--  <module>stock-service</module> -->
         <module>uaa-service</module>
+		<module>monitor-service</module>
+		<module>turbine-service</module>
     </modules>
 
     <properties>

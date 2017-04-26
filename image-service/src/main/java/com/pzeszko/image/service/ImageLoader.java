@@ -1,6 +1,7 @@
 package com.pzeszko.image.service;
 
 import com.pzeszko.image.dto.ImageDto;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
  * Created by Admin on 07.04.2017.
  */
 @Service
+@Log4j
 public class ImageLoader {
 
     private ResourceLoader resourceLoader;
@@ -30,7 +32,7 @@ public class ImageLoader {
 
     public List<ImageDto> loadImages() throws IOException {
         Resource[] images = loadResources("classpath:/images/*");
-
+        log.info("Loading images");
         List<ImageDto> imageList = Arrays.stream(images).map(image -> {
             String base64Data = null;
 
@@ -43,9 +45,7 @@ public class ImageLoader {
 
             return new ImageDto(getFilenameWIthNoExt(image.getFilename()), base64Data);
         }).collect(Collectors.toList());
-        if(true) {
-            throw new RuntimeException("Unexpected error occured");
-        }
+
         return imageList;
     }
 
