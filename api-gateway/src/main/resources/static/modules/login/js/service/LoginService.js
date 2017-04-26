@@ -31,12 +31,10 @@
                 method: 'POST',
                 url: ApiService.getTokenAccessURL(),
                 headers: {
-                    "Authorization": "Basic " + btoa("acme:acmesecret"),
-                    "Content-type": "application/x-www-form-urlencoded; charset=utf-8",
                     "Access-Control-Allow-Credentials": "true"
                 },
                 withCredentials: true,
-                data: $httpParamSerializer(data)
+                data: data
             };
             return $http(request);
         }

@@ -5,9 +5,6 @@ spring:
 # Define the port where the UAA server would be running
 server:
   port: 8802
-  # Use different context-path to avoid session cookie overlapping
-  context-path: /uaa
-  use-forward-headers: false
 
 # Define the Eureka server that handles service registration
 eureka:
@@ -27,6 +24,8 @@ security:
 logging:
   level.org.springframework.security: DEBUG
 
+flyway:
+  locations: classpath:db/migration
 ---
 spring:
   profiles: docker

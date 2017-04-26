@@ -9,7 +9,7 @@
         };
 
         vm.getTokenAccessURL = function () {
-            return vm.getBaseURL() + '/uaa/oauth/token';
+            return vm.getBaseURL() + '/oauth/token';
         };
 
         vm.getShoesURL = function() {
@@ -29,7 +29,7 @@
         };
         
         vm.getUserInfoURL = function() {
-            return vm.getBaseURL() + '/me';
+            return vm.getBaseURL() + '/me/';
         };
 
     }]);
