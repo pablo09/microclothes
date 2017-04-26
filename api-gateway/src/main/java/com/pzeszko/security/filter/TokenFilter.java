@@ -1,8 +1,11 @@
 package com.pzeszko.security.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.pzeszko.client.AuthClient;
+import com.pzeszko.exception.ErrorCode;
+import com.pzeszko.exception.OAuthErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
@@ -19,8 +22,10 @@ import java.util.Enumeration;
 public class TokenFilter extends ZuulFilter {
 
     private AuthClient authClient;
+    private ObjectMapper mapper;
 
     public TokenFilter(AuthClient authClient) {
+        mapper = new ObjectMapper();
         this.authClient = authClient;
     }
 
@@ -45,19 +50,19 @@ public class TokenFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
         String token = extractHeaderToken(request);
         if(token == null) {
-            createErrorResponse(ctx);
+            createErrorResponse(ctx, ErrorCode.INVALID_REQUEST);
         } else {
             ResponseEntity<String> responseEntity = null;
             try {
                 responseEntity = authClient.authorize(token);
             } catch(Exception e) {
                 log.warn("Error occured while processing request");
-                createErrorResponse(ctx);
+                createErrorResponse(ctx, ErrorCode.UNAUTHORIZED_CLIENT);
                 return null;
             }
 
             if(!responseEntity.getStatusCode().is2xxSuccessful()) {
-                createErrorResponse(ctx);
+                createErrorResponse(ctx, ErrorCode.UNAUTHORIZED_CLIENT);
             } else {
                 ctx.addZuulRequestHeader("Authorization", "Bearer " + responseEntity.getBody());
             }
@@ -89,13 +94,14 @@ public class TokenFilter extends ZuulFilter {
         return authHeaderValue;
     }
 
-    private HttpServletResponse createErrorResponse(RequestContext ctx) {
+    private HttpServletResponse createErrorResponse(RequestContext ctx, ErrorCode errorCode) {
+        ctx.setSendZuulResponse(false);
         HttpServletResponse response = ctx.getResponse();
 
         response.setStatus(500);
 
         try {
-            response.getWriter().write("No token or token invalid");
+            response.getWriter().write(mapper.writeValueAsString(new OAuthErrorResponse(errorCode)));
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();

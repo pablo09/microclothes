@@ -64,6 +64,7 @@ public class DefaultAccessTokenGenerator implements AccessTokenGenerator{
         userToken.setAccess_token(generateToken());
         userToken.setRefresh_token(generateToken());
         userToken.setToken_type("Bearer");
+        
         return userToken;
     }
 

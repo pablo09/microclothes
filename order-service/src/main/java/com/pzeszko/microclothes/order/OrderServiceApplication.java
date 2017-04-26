@@ -1,6 +1,7 @@
 package com.pzeszko.microclothes.order;
 
 import com.pzeszko.microclothes.order.config.UserHystrixRequestContext;
+import com.pzeszko.microclothes.order.config.authentication.JwtAuthentication;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.boot.SpringApplication;
@@ -10,8 +11,6 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 
 /**
  * Created by Admin on 11.04.2017.
@@ -19,7 +18,6 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableFeignClients
 public class OrderServiceApplication {
@@ -34,9 +32,10 @@ public class OrderServiceApplication {
         return new RequestInterceptor() {
             @Override
             public void apply(RequestTemplate requestTemplate) {
+
                 Authentication auth = UserHystrixRequestContext.getInstance().get();
-                OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) auth.getDetails();
-                requestTemplate.header("Authorization", "Bearer " + details.getTokenValue());
+                JwtAuthentication jwtAuthentication = (JwtAuthentication) auth;
+                requestTemplate.header("Authorization", "Bearer " + jwtAuthentication.getJwt());
             }
         };
     }
