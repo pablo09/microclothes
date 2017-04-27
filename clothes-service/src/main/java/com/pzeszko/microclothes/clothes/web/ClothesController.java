@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Admin on 08.04.2017.
@@ -21,13 +23,32 @@ public class ClothesController {
     @Autowired
     private ClothesService clothesService;
 
+    private Lock lock = new ReentrantLock();
+
+    public void doSomething(int x) {
+        lock.lock(); // Noncompliant
+        if (x == 4) {
+            lock.unlock();
+        }
+    }
+
     @RequestMapping("/")
     public List<ClothesDto> getClothes() {
+
+        doSomething(4);
         return clothesService.findAll();
     }
 
     @RequestMapping("/{clothesId}")
     public ClothesDetailsDto getClothes(@PathVariable("clothesId") String clothesId) {
+            ClothesDto d1;
+            ClothesDto d2;
+        if (d1 == d2) {
+            System.out.println("str1 == str2");
+        }
+        if(a == b) {
+            return null;
+        }
         return clothesService.findClothesDetails(clothesId);
     }
 
