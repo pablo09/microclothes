@@ -6,14 +6,13 @@ import com.netflix.zuul.context.RequestContext;
 import com.pzeszko.client.AuthClient;
 import com.pzeszko.exception.ErrorCode;
 import com.pzeszko.exception.OAuthErrorResponse;
+import com.pzeszko.security.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  * Created by Admin on 25.04.2017.
@@ -48,7 +47,7 @@ public class TokenFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        String token = extractHeaderToken(request);
+        String token = SecurityUtils.extractHeaderToken(request);
         if(token == null) {
             createErrorResponse(ctx, ErrorCode.INVALID_REQUEST);
         } else {
@@ -72,33 +71,11 @@ public class TokenFilter extends ZuulFilter {
         return null;
     }
 
-    protected String extractHeaderToken(HttpServletRequest request) {
-        Enumeration headers = request.getHeaders("Authorization");
-
-        String value;
-        do {
-            if(!headers.hasMoreElements()) {
-                return null;
-            }
-
-            value = (String)headers.nextElement();
-        } while(!value.toLowerCase().startsWith("Bearer".toLowerCase()));
-
-        String authHeaderValue = value.substring("Bearer".length()).trim();
-        request.setAttribute(OAuth2AuthenticationDetails.ACCESS_TOKEN_TYPE, value.substring(0, "Bearer".length()).trim());
-        int commaIndex = authHeaderValue.indexOf(44);
-        if(commaIndex > 0) {
-            authHeaderValue = authHeaderValue.substring(0, commaIndex);
-        }
-
-        return authHeaderValue;
-    }
-
     private HttpServletResponse createErrorResponse(RequestContext ctx, ErrorCode errorCode) {
         ctx.setSendZuulResponse(false);
         HttpServletResponse response = ctx.getResponse();
 
-        response.setStatus(500);
+        response.setStatus(403);
 
         try {
             response.getWriter().write(mapper.writeValueAsString(new OAuthErrorResponse(errorCode)));

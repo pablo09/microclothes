@@ -7,8 +7,11 @@
 
         vm.getInfo = function() {
             UserService.getUserInfo().then(function(response) {
-                vm.loggedUser = response.data.username;
-                $rootScope.loggedUser = vm.loggedUser;
+                if(response.data.username !== null) {
+                    vm.loggedUser = response.data.username;
+                    $rootScope.loggedUser = vm.loggedUser;
+                }
+
             }, function(error) {
                 console.log(error);
             });

@@ -6,7 +6,12 @@ import com.pzeszko.service.OAuthService;
 import com.pzeszko.user.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Admin on 26.04.2017.
@@ -23,7 +28,7 @@ public class OAuthController {
     }
 
     @RequestMapping("/me")
-    public UserInfo userInfo(@RequestBody String token) {
-        return new UserInfo(oAuthService.getUserInfo(token));
+    public UserInfo userInfo(HttpServletRequest request) {
+        return new UserInfo(oAuthService.getUserInfo(request));
     }
 }

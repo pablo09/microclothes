@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -105,6 +106,8 @@ public class DefaultJwtGenerator implements JwtGenerator {
         jwtPayload.setClientId("acme");
         jwtPayload.setAuthorities(userDetails.getAuthorities().stream().map(authority -> authority.getAuthority()).collect(Collectors.toList()));
         jwtPayload.setScope(Arrays.asList("openid"));
+        jwtPayload.setExp("3600");
+        jwtPayload.setJti(UUID.randomUUID().toString());
 
         return jwtPayload;
     }

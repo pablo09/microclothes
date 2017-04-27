@@ -1,11 +1,10 @@
 (function () {
     'use strict';
 
-    function UserService(ApiService, RestService, $cookies) {
+    function UserService(ApiService, RestService) {
 
         function getUserInfo() {
-            var data = $cookies.get('access_token');
-            return RestService.makeMicroCall(ApiService.getUserInfoURL(), 'POST', data);
+            return RestService.makeMicroCall(ApiService.getUserInfoURL());
         }
 
         return {

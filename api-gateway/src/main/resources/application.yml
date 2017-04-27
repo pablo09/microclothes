@@ -6,7 +6,11 @@ spring:
 
 # Define the port where the API gateway server would be running
 server:
-  port: 8765
+  port: 8443
+  ssl:
+    key-store: classpath:gateway.jks
+    key-store-password: password
+    key-password: password
 
 # Define the Eureka server that handles service registration
 eureka:
