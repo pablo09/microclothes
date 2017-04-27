@@ -41,14 +41,12 @@ public class ClothesController {
 
     @RequestMapping("/{clothesId}")
     public ClothesDetailsDto getClothes(@PathVariable("clothesId") String clothesId) {
-            ClothesDto d1;
-            ClothesDto d2;
+            ClothesDto d1 = new ClothesDto();
+            ClothesDto d2 = new ClothesDto();
         if (d1 == d2) {
             System.out.println("str1 == str2");
         }
-        if(a == b) {
-            return null;
-        }
+
         return clothesService.findClothesDetails(clothesId);
     }
 
