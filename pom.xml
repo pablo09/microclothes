@@ -16,11 +16,16 @@
     </parent>
 
     <modules>
-        <module>ui</module>
         <module>api-gateway</module>
         <module>service-registry</module>
-        <module>dummy-service</module>
         <module>user-service</module>
+        <module>account-service</module>
+        <module>clothes-service</module>
+        <module>image-service</module>
+        <module>order-service</module> 
+        <module>price-service</module>
+        <module>shoes-service</module>
+        <module>stock-service</module>
         <module>uaa-service</module>
     </modules>
 
@@ -63,7 +68,7 @@
                         <images>
                             <image>
                                 <alias>${project.name}</alias>
-                                <name>kakawait/${project.artifactId}</name>
+                                <name>pzeszko/${project.artifactId}</name>
                                 <build>
                                     <from>java:8-jre-alpine</from>
                                     <tags>
@@ -78,8 +83,9 @@
                                     <entryPoint>
                                         <exec>
                                             <arg>java</arg>
-                                            <arg>-Djava.security.egd=file:/dev/./urandom</arg>
+											<arg>-Djava.security.egd=file:/dev/./urandom</arg>
                                             <arg>-Dspring.profiles.active=docker</arg>
+											
                                             <arg>-jar</arg>
                                             <arg>/app.jar</arg>
                                         </exec>
