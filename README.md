@@ -2,8 +2,10 @@ Microclothes - proof of concept system which shows microservices approach to bui
 
 1. Install Java 8
 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
 2. Install Maven
 https://maven.apache.org/install.html
+
 3. Install Docker 
 https://docs.docker.com/engine/installation/
 
