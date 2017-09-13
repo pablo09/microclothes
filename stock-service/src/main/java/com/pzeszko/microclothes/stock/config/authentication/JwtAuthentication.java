@@ -1,6 +1,6 @@
 package com.pzeszko.microclothes.stock.config.authentication;
 
-import com.pzeszko.microclothes.account.config.authentication.decoder.JwtPayload;
+import com.pzeszko.microclothes.stock.config.authentication.decoder.JwtPayload;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

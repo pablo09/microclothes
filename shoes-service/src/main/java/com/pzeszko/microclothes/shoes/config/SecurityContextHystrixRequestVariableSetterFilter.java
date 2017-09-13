@@ -1,9 +1,9 @@
 package com.pzeszko.microclothes.shoes.config;
 
 
-import com.pzeszko.microclothes.account.config.authentication.JwtAuthentication;
-import com.pzeszko.microclothes.account.config.authentication.JwtVerifier;
-import com.pzeszko.microclothes.account.config.authentication.decoder.JwtDecoder;
+import com.pzeszko.microclothes.shoes.config.authentication.JwtAuthentication;
+import com.pzeszko.microclothes.shoes.config.authentication.JwtVerifier;
+import com.pzeszko.microclothes.shoes.config.authentication.decoder.JwtDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
